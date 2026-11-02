@@ -1,0 +1,233 @@
+{
+ "note": "z relative to the PCB underside, positive up (PCB top = +1.0). From img1106 via tools/port_profiles.py",
+ "ports": {
+  "dc": {
+   "x": [
+    2.0,
+    10.0
+   ],
+   "z_top": 4.4,
+   "z_bottom": -0.5,
+   "width_px": 150,
+   "px_per_mm": 18.75,
+   "face_w": 8.0,
+   "face_h": 5.0,
+   "shape": "circle",
+   "note": "barrel jack, upper side; round plug hole centred on the face",
+   "d": 9.0
+  },
+  "usbc": {
+   "x": [
+    15.7,
+    23.5
+   ],
+   "z_top": 4.7,
+   "z_bottom": 0.7,
+   "width_px": 133,
+   "px_per_mm": 14.94,
+   "face_w": 8.9,
+   "face_h": 4.0,
+   "shape": "rrect",
+   "note": "upper side"
+  },
+  "rj45": {
+   "x": [
+    91.0,
+    109.5
+   ],
+   "z_top": 4.2,
+   "z_bottom": -9.8,
+   "width_px": 210,
+   "px_per_mm": 13.12,
+   "face_w": 16.0,
+   "face_h": 14.0,
+   "shape": "rect",
+   "note": "mid-mount, mostly below"
+  },
+  "vga": {
+   "x": [
+    116.75,
+    133.25
+   ],
+   "z_top": 1.9,
+   "z_bottom": -5.7,
+   "width_px": 265,
+   "px_per_mm": 15.68,
+   "face_w": 16.9,
+   "face_h": 7.6,
+   "shape": "dsub",
+   "note": "D-sub shell"
+  },
+  "hdmi": {
+   "x": [
+    137.75,
+    153.0
+   ],
+   "z_top": 2.3,
+   "z_bottom": -2.6,
+   "width_px": 212,
+   "px_per_mm": 14.13,
+   "face_w": 15.0,
+   "face_h": 4.9,
+   "shape": "hdmi",
+   "note": "mid-mount"
+  },
+  "usb3": {
+   "x": [
+    156.5,
+    169.5
+   ],
+   "z_top": 3.1,
+   "z_bottom": -3.6,
+   "width_px": 155,
+   "px_per_mm": 11.83,
+   "face_w": 13.1,
+   "face_h": 6.7,
+   "shape": "rect",
+   "note": "mid-mount"
+  },
+  "usb2": {
+   "x": [
+    174.5,
+    188.0
+   ],
+   "z_top": 3.1,
+   "z_bottom": -3.8,
+   "width_px": 155,
+   "px_per_mm": 11.83,
+   "face_w": 13.1,
+   "face_h": 6.8,
+   "shape": "rect",
+   "note": "mid-mount"
+  },
+  "audio": {
+   "x": [
+    194.5,
+    198.5
+   ],
+   "z_top": 2.9,
+   "z_bottom": -2.5,
+   "width_px": 81,
+   "px_per_mm": 11.83,
+   "face_w": 6.8,
+   "face_h": 5.4,
+   "shape": "circle",
+   "note": "scale from usb2"
+  }
+ },
+ "ports_photo": {
+  "dc": {
+   "x": [
+    3.0,
+    11.0
+   ],
+   "z_top": 2.9,
+   "z_bottom": -2.0,
+   "width_px": 150,
+   "px_per_mm": 18.75,
+   "face_w": 8.0,
+   "face_h": 5.0,
+   "shape": "circle",
+   "note": "barrel jack, upper side; round plug hole centred on the face",
+   "d": 9.0
+  },
+  "usbc": {
+   "x": [
+    16.2,
+    24.0
+   ],
+   "z_top": 2.7,
+   "z_bottom": -1.3,
+   "width_px": 133,
+   "px_per_mm": 14.94,
+   "face_w": 8.9,
+   "face_h": 4.0,
+   "shape": "stadium",
+   "note": "upper side"
+  },
+  "rj45": {
+   "x": [
+    91.0,
+    109.5
+   ],
+   "z_top": 3.2,
+   "z_bottom": -10.8,
+   "width_px": 210,
+   "px_per_mm": 13.12,
+   "face_w": 16.0,
+   "face_h": 14.0,
+   "shape": "rect",
+   "note": "mid-mount, mostly below"
+  },
+  "vga": {
+   "x": [
+    116.25,
+    132.75
+   ],
+   "z_top": 0.9,
+   "z_bottom": -6.7,
+   "width_px": 265,
+   "px_per_mm": 15.68,
+   "face_w": 16.9,
+   "face_h": 7.6,
+   "shape": "dsub",
+   "note": "D-sub shell"
+  },
+  "hdmi": {
+   "x": [
+    137.75,
+    153.0
+   ],
+   "z_top": 1.8,
+   "z_bottom": -3.1,
+   "width_px": 212,
+   "px_per_mm": 14.13,
+   "face_w": 15.0,
+   "face_h": 4.9,
+   "shape": "hdmi",
+   "note": "mid-mount"
+  },
+  "usb3": {
+   "x": [
+    156.5,
+    169.5
+   ],
+   "z_top": 2.6,
+   "z_bottom": -4.1,
+   "width_px": 155,
+   "px_per_mm": 11.83,
+   "face_w": 13.1,
+   "face_h": 6.7,
+   "shape": "rect",
+   "note": "mid-mount"
+  },
+  "usb2": {
+   "x": [
+    174.5,
+    188.0
+   ],
+   "z_top": 2.6,
+   "z_bottom": -4.3,
+   "width_px": 155,
+   "px_per_mm": 11.83,
+   "face_w": 13.1,
+   "face_h": 6.8,
+   "shape": "rect",
+   "note": "mid-mount"
+  },
+  "audio": {
+   "x": [
+    194.5,
+    198.5
+   ],
+   "z_top": 1.9,
+   "z_bottom": -3.5,
+   "width_px": 81,
+   "px_per_mm": 11.83,
+   "face_w": 6.8,
+   "face_h": 5.4,
+   "shape": "circle",
+   "note": "scale from usb2"
+  }
+ }
+}

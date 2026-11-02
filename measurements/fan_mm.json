@@ -1,0 +1,77 @@
+{
+ "source": "mounts from photos/img1108 chassis posts (board-frame affine from 7 holes); envelope and impeller from photos/board-in-chassis (affine from 6 holes)",
+ "mounts": {
+  "M1": [
+   17.6,
+   163.2
+  ],
+  "M2": [
+   64.6,
+   234.2
+  ],
+  "M3": [
+   91.9,
+   165.9
+  ]
+ },
+ "mounts_from_1102": {
+  "M1": [
+   18.6,
+   166.4
+  ],
+  "M2": [
+   62.8,
+   235.1
+  ],
+  "M3": [
+   89.4,
+   181.8
+  ]
+ },
+ "envelope": {
+  "X_min": 12.3,
+  "X_max": 87.2,
+  "Y_min": 146.5,
+  "Y_max": 236.2
+ },
+ "impeller_center": [
+  39.9,
+  193.7
+ ],
+ "impeller_dia": 55,
+ "thickness": 10,
+ "outlet": "edge at Y_min, blows toward -Y",
+ "mounts_photo": {
+  "M1": [
+   17.6,
+   163.2
+  ],
+  "M2": [
+   66.5,
+   231.3
+  ],
+  "M3": [
+   92.6,
+   180.2
+  ]
+ },
+ "boss_h": {
+  "M2": 8.4,
+  "M3": 4.5
+ },
+ "envelope_photo": {
+  "X_min": 12.3,
+  "X_max": 87.2,
+  "Y_min": 146.5,
+  "Y_max": 234.2
+ },
+ "impeller_center_photo": [
+  41.0,
+  195.1
+ ],
+ "fan_rotation_deg": 1.16,
+ "wifi_nub": [
+  116.0,
+  165.9
+ ]
+}

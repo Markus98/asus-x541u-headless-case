@@ -1,0 +1,52 @@
+{
+ "note": "SSD in the case frame, bottom (hole side) up, connector end toward +Y, from img1108 via tools/measure_ssd.py",
+ "x_from": 128.7,
+ "x_to": 198.5,
+ "y_connector_end": 110.1,
+ "y_far_end": 10.1,
+ "z_top": 23.0,
+ "thickness": 7.0,
+ "bottom_holes": [
+  [
+   132.7,
+   96.1
+  ],
+  [
+   194.5,
+   96.1
+  ],
+  [
+   132.7,
+   19.5
+  ],
+  [
+   194.5,
+   19.5
+  ]
+ ],
+ "hole_std": "SFF-8201 bottom holes M3: 14.0 and 90.6 from the connector end, 4.07 from each side",
+ "photo": {
+  "x_from": 125.6,
+  "x_to": 195.4,
+  "y_connector_end": 112.6,
+  "y_far_end": 12.6,
+  "bottom_holes": [
+   [
+    129.6,
+    98.6
+   ],
+   [
+    191.4,
+    98.6
+   ],
+   [
+    129.6,
+    22.0
+   ],
+   [
+    191.4,
+    22.0
+   ]
+  ]
+ }
+}

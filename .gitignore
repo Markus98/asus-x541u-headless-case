@@ -1,0 +1,6 @@
+# camera originals carry location metadata; the JPEG conversions in photos/ have no EXIF
+*.HEIC
+*.heic
+__pycache__/
+# per-machine Claude Code permissions
+.claude/settings.local.json
