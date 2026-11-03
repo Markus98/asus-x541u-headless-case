@@ -54,7 +54,9 @@ dc_clear = 7.0           # gap at the DC end: the battery connector overhangs th
 audio_clear = 6.5        # gap at the audio end: room for the corner screw posts beside H5 and H6
 wall_t = 2.4
 floor_t = 2.4
-corner_r = 4.1           # post_od / 2 + 0.1: the corner posts sit just inside the fillet (coincident faces break the solid)
+post_od = 10.0           # lid screw posts in the wall, concentric with the corner fillet, floor to wall top, M3 heat-set inserts; 10 (was 8) so the
+                         # lid's corner screw recess keeps a 1 mm wall to the chamfered outer edge in the first layers (lid prints plate down)
+corner_r = post_od / 2 + 0.1   # the corner posts sit just inside the fillet (coincident faces break the solid)
 edge_chamfer = 1.0       # outer edge chamfer on the case bottom and the lid top
 port_margin = 1.0        # port openings this much larger than the connector face all round
 sd_y = (32.5, 62.5)      # SD slot window on the audio-end wall (Y extent); 3.5 toward the port-edge corner after the v3 print, 1 smaller all round after jig v5
@@ -69,7 +71,6 @@ grille_hole_d = 4.5      # floor grille of round holes under the fan intake open
 grille_pitch = 6.5
 vent_w, vent_rib = 4.5, 1.5     # wall vent slots: intake slot width and the rib between slots; exhaust and intake both on the port edge (bookshelf use)
 exhaust_slots = 4        # exhaust row: this many wide slots across the channel (fewer ribs, more area; 14 mm bridges print fine)
-post_od = 8.0            # lid screw posts in the wall, concentric with the corner fillet, floor to wall top, M3 heat-set inserts
 post_insert_d = 4.0      # M3 x 5.7 heat-set insert hole
 post_cbore_d = 6.0       # lead-in counterbore above the insert hole, lip_h deep; the lid bosses plug into it
 lid_boss_d = 5.6
@@ -82,7 +83,11 @@ lip_t = 1.6
 lip_clear = 0.2          # lip to inner wall face and to the posts
 lid_clear = 0.3          # wall top (lid underside) above the SSD top: the SSD screws straight to the plate, no bosses (user: as thin as possible)
 ssd_hole_d = 3.6         # a little loose for the photo-based SSD position
-spacer_h, spacer_od, spacer_hole = 2.0, 6.0, 2.8   # H8 spacer between the main board top and the ODD board (2 mm measured on jig v6, was 3)
+ssd_wall_gap = 0.5       # the SSD's far end this close to the port-edge inner wall face: with the cable clip the ODD ribbon only reaches when the
+                         # SSD and the ODD board move from the laptop position toward the port edge (about 9.6 mm, 2026-11-03)
+spacer_h, spacer_od = 2.0, 6.0     # ODD spacer under hole O6 (over the main board, no screw there any more): 2 mm measured on jig v6
+nub_d = 2.3              # its nub up through the O6 hole (2.6 mm) to the lid underside, so the spacer cannot move up or down
+nub_clear = 0.1          # nub top this far under the lid
 clip_slot_w = 22.5       # ODD cable clip: slips onto the ODD board's pointy end; the folded ribbon cable goes through with the board
 clip_slot_h = 1.2        # PCB plus the ribbon cable, tight (1.5 was loose)
 clip_bend_r = 1.5        # the bar on one side of the slot ends in a full half round of this radius (3 mm diameter) for the cable to fold round
@@ -109,11 +114,18 @@ jig_lid_bar = 8.0
 
 x0, x1 = -dc_clear, L + audio_clear
 y0, y1 = -edge_clear, fan_env[3] + fan_clear
+odd_dy = (y0 + ssd_wall_gap) - ssd_y[0]          # the SSD and the ODD board (plugged together) move by this much in Y from the laptop layout
+ssd_y = (ssd_y[0] + odd_dy, ssd_y[1] + odd_dy)
+ssd_holes = [[X, Y + odd_dy] for X, Y in ssd_holes]
+odd_mounts = {k: [X, Y + odd_dy] for k, (X, Y) in odd_mounts.items()}
+odd_nub = (holes["H8"][0], holes["H8"][1] + odd_dy)   # ODD hole O6 (on H8 in the laptop) is now over the board: the nub spacer goes there
 z_pcb = floor_t + standoff_h                     # PCB underside
 z_pcb_top = z_pcb + pcb_t
 case_h = ssd_z_top + lid_clear                   # wall top = lid underside
 exhaust_z = (floor_t + 1.0, z_pcb - 1.0)         # exhaust slots: the full under-board layer between the channel walls
-intake_x = (port_profiles["rj45"]["x"][1] + port_margin + 1.5, L - 3.0)   # intake slots in the port-edge wall above the ports only, none above the exhaust (recirculation) or the tall RJ45 window
+intake_x = (port_profiles["rj45"]["x"][1] + port_margin + 1.5, ssd_x[0] + 0.5)   # intake slots in the port-edge wall above the ports, from past the tall
+                                                 # RJ45 window to where the SSD stands against the wall (its DC-end side); none above the exhaust
+                                                 # (recirculation). The audio-end wall carries no vents: the case stands on it.
 intake_z = (z_pcb_top + 3.8, case_h - lip_h - 0.4)   # above the port openings (USB top 17.5), below the lid lip
 post_x = (x0 - wall_t + corner_r, x1 + wall_t - corner_r)             # concentric with the corner fillet, 0.1 inside the outer face
 post_y = (y0 - wall_t + corner_r, y1 + wall_t - corner_r)
@@ -324,6 +336,7 @@ def build_lid(skeleton=False):
     lip = rect(x0 + lip_clear, x1 - lip_clear, y0 + lip_clear, y1 - lip_clear, case_h - lip_h, case_h + 0.01)
     lip = lip - rect(x0 + lip_clear + lip_t, x1 - lip_clear - lip_t, y0 + lip_clear + lip_t, y1 - lip_clear - lip_t, case_h - lip_h - 1, case_h + 1)
     lip = lip.cut(*[post(X, Y, post_od + 2 * lip_clear, lip_h + 2, case_h - lip_h - 1) for X, Y in lid_posts])   # lip clears the posts
+    lip = lip - rect(ssd_x[0] - 1, ssd_x[1] + 1, y0 - 1, y0 + lip_clear + lip_t + 0.5, case_h - lip_h - 1, case_h + 1)   # no lip where the SSD meets the port-edge wall
     lip = lip.fuse(*[post(X, Y, lid_boss_d, lip_h + 0.01, case_h - lip_h) for X, Y in lid_posts])               # bosses plug into the post counterbores
     with BuildPart() as lb:
         add(plate + lip)
@@ -340,9 +353,10 @@ show(lid_print, "lid_print")
 lid_jig = build_lid(skeleton=True).rotate(Axis.X, 180)
 show(lid_jig, "lid_jig")
 
-# --- spacer between the main board top and the ODD board at H8 ---
-spacer = Cylinder(spacer_od / 2, spacer_h, align=(Align.CENTER, Align.CENTER, Align.MIN)) - Cylinder(spacer_hole / 2, spacer_h + 2, align=(Align.CENTER, Align.CENTER, Align.MIN)).move(Location((0, 0, -1)))
-show(spacer, "spacer")
+# --- ODD spacer: a loose disc on the main board top under ODD hole O6, with a nub up through the hole to the lid underside ---
+nub_h = case_h - nub_clear - (z_pcb_top + spacer_h)       # from the spacer top (ODD underside) to just under the lid
+odd_spacer = Cylinder(spacer_od / 2, spacer_h, align=(Align.CENTER, Align.CENTER, Align.MIN)) + Cylinder(nub_d / 2, spacer_h + nub_h, align=(Align.CENTER, Align.CENTER, Align.MIN))
+show(odd_spacer, "odd_spacer")
 
 # --- ODD cable clip: a ring that slips onto the ODD board's pointy end, the cable through the slot with the board ---
 # Z along the board, Y across the thickness: rectangular bar, slot, then the bar between the side walls that is straight for ext and ends

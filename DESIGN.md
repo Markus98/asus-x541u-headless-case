@@ -40,8 +40,11 @@ Updated as measurements and decisions come in.
   white lines under the board) from the port-edge wall to Y=138, 7 mm short of the far board edge (v3 print: the fan reaches under the board and needs 7 mm). Fan blows through it over the heatsink, out through slots in the port-edge wall.
 - H2 and H7 get no bosses (no chassis post in the laptop). H11 (between H10 and H6) and H12 (edge half hole next to the battery connector) added after the v3 print.
 - Battery connector overhangs the DC-end edge about 6 mm at Y 79 to 108: the whole DC-end wall sits 7 mm from the PCB edge (case stays a plain rectangle).
-- ODD board flipped over the main board, BOT side up, hole O6 on H8. Its own 14 mm bosses at O1 (193.9, 115.1, the corner hole of the three) and O7 (140.5, 207.0, on H10's X line),
-  the pointy-end hole. At H8 the ODD board sits about 2 mm above the main board top, so that screw needs a 2 mm spacer (or H8 gets a stacked boss later).
+- ODD board flipped over the main board, BOT side up. In the laptop its hole O6 sits on H8; here the ODD board and the SSD plugged into it are
+  moved 9.6 mm toward the port edge (`ssd_wall_gap` in `cad/base.py`: the SSD's far end 0.5 from the inner wall face), because with the cable
+  clip the ribbon no longer reaches the laptop position. Its own 14 mm bosses at O1 (193.9, 105.5, the corner hole of the three) and
+  O7 (140.5, 197.4, on H10's X line, the pointy-end hole). O6 (91.9, 121.9) is now over the main board with no hole under it: a loose
+  2 mm spacer disc sits there under the ODD board with a nub up through the hole to the lid (see the ODD spacer below).
 - Port openings follow each connector face (shape, height and vertical position from the profile photo `img1106`, `tools/port_profiles.py`),
   1 mm margin all round, never below the floor top. DC jack: 9 mm round hole centred on the jack face (plug boot; adjust `d` if the plug is fatter). RJ45 does not hang below the standoff plane (mid-mount), no floor pocket.
   After the v5 jig every window moved: all lifted (DC 1.5, USB-C 2.5, RJ45 and audio 1, the rest 0.5), DC and USB-C 1 toward the DC corner, VGA 0.5 toward HDMI
@@ -57,23 +60,29 @@ Updated as measurements and decisions come in.
   is upward facing, so it prints fine). The 1.5 mm Z flat is all the 45 degree ceiling leaves: it reaches 20.9 at the outer face under the
   2.4 mm wall top. Same funnel in the jig with its thinner wall, on a floor bar.
 - Vents, for bookshelf use (only the port edge and the lid open): exhaust slots in the port-edge wall between the channel walls, the full under-board
-  layer (4 slots 14 mm wide, 1.5 mm ribs, z 3.4 to 11.4, about 450 mm2 of the 613 mm2 channel section); intake slots in the same wall above the ports only
-  (z 17.2 to 20.4, X 112 to 200.5, about 216 mm2), none above the exhaust to limit recirculation and none above the RJ45 window (its lifted top reaches 17.6),
-  so incoming air crosses the board top to reach the fan plenum. The SSD end sits 11 mm behind those slots and covers their height, so that air goes
-  through the 2.6 mm gap under the SSD and round its DC-end side (about 300 mm2 of passage). The PCB separates the two layers. The blower draws through
-  both faces: a 48-hole grille (4.5 mm holes, 6.5 pitch, about 760 mm2) in the floor under the fan and the same grille in the lid above it; the lid grille
-  is the main intake on a shelf. The gaps round the port connectors add about 40 mm2 above the PCB and 280 mm2 below it. The audio-end slits were removed.
+  layer (4 slots 14 mm wide, 1.5 mm ribs, z 3.4 to 11.4, about 450 mm2 of the 613 mm2 channel section); intake slots in the same wall above the
+  ports (z 17.2 to 20.4), none above the exhaust to limit recirculation and none above the RJ45 window (its lifted top reaches 17.6). With the SSD
+  standing 0.5 mm from that wall from X 128.2 on, only the three slots at X 112 to 128.5 remain (about 43 mm2, was 216 with the row to X 200.5);
+  the audio-end wall carries no vents because the case will stand on it (user, 2026-11-03). The PCB separates the two layers. The blower draws
+  through both faces: a 48-hole grille (4.5 mm holes, 6.5 pitch, about 760 mm2) in the floor under the fan and the same grille in the lid above
+  it; with the case on its audio end both grilles are open and they are the real intake, right at the impeller. The small slots and the gaps
+  round the port connectors (about 40 mm2 above the PCB, 280 mm2 below) only add a little crossflow over the board top.
 - Base walls go the full height, 23.3 mm inside (SSD top 23 + 0.3, as thin as possible). The lid (`cad/out/lid.stl`, printed lip up) is a flat 2.4 mm
-  plate with a 1.6 mm lip, 2.5 mm tall, that slots inside the walls all round with 0.2 mm clearance and goes round the posts (no cut-outs: there is
-  room above the DC jack and the battery connector, lip bottom is 7.4 above the PCB top). Four 8 mm screw posts in the corners, concentric with the
-  4.1 mm corner fillet (0.1 inside the outer face), floor to wall top, in the four corners only (user: no posts bulging into the case elsewhere).
+  plate with a 1.6 mm lip, 2.5 mm tall, that slots inside the walls with 0.2 mm clearance and goes round the posts (there is room above the DC jack
+  and the battery connector, lip bottom is 7.4 above the PCB top). The lip is left out along the port-edge wall over the SSD's X range (127 to 199),
+  where the SSD stands against that wall up to 0.3 under the plate. Four 10 mm screw posts in the corners, concentric with the
+  5.1 mm corner fillet (0.1 inside the outer face), floor to wall top, in the four corners only (user: no posts bulging into the case elsewhere).
+  They were 8 mm on a 4.1 fillet; the extra 1 mm keeps a wall round the lid's corner screw recesses in the first layers (see the chamfer below).
   Each has a 6 mm counterbore 2.5 deep (insert lead-in) above the 4.0 mm hole for an M3 x 5.7 heat-set insert. The lid has 5.6 mm bosses that plug
   into those counterbores, 3.4 mm holes with a 6.2 mm head recess 1.4 deep (1 mm floor over the boss), M3 x 10 button head screws sit
   about 0.3 above the plate. End gaps 7 mm (DC, battery connector) and 6.5 mm (audio,
   post beside H5), port-edge gap 0.5, inner 217 x 238.7, outer about 222 x 243.5 mm, total height 25.7 mm.
   Port openings are closed windows shaped like the connectors, so the board goes in with a 3 mm slide toward the port edge.
   SSD screwed from outside: four 3.6 mm holes on the SFF-8201 bottom pattern, same 6.2 mm x 1.4 head recess (1 mm floor, SSD 0.3 below it).
-  No bosses, the SSD screws straight to the plate. Lid grille over the fan. 1 mm chamfer on the case bottom edge and the lid top edge.
+  No bosses, the SSD screws straight to the plate. Lid grille over the fan. 1 mm chamfer on the case bottom edge and the lid top edge. The lid
+  prints plate down, so the chamfer is at the bed and insets the first layer by 1 mm: with the 8 mm posts the 6.2 mm corner screw recess was
+  1 mm from the outer face and the first layers had no wall round it (lid v3 corners failed). With the 10 mm posts the recess is 2 mm from the
+  face, 1 mm at the first layer.
   Peek slit in the lid for the POWER and CHARGER LEDs (side-firing on the audio-end board edge beside H5, Y about 19 and 29 from the
   board-in-chassis photo): a 1 mm wide slit (as thin as prints, so nothing falls in) directly above the LED packages at X 202.5, Y 17 to 31, round ends, flared
   at 45 degrees on the inside (1.6 mm deep, 4.2 mm wide at the underside, 0.8 mm of straight 1 mm slot at the outer face) for a wider viewing angle. The CHARGER LED
@@ -81,8 +90,11 @@ Updated as measurements and decisions come in.
 - SSD: bottom (hole side) up, plugged into the ODD board, position measured from the chassis photo (`tools/measure_ssd.py`, `measurements/ssd_mm.json`):
   then corrected on the v5 jig with a ruler (hole nearest the audio-end wall 15.5 from it, hole nearest the audio port 20.5 from the port-edge wall;
   the photo was 3.1 off in X and 2.5 in Y), then on lid v2 (16 from the audio-end wall, 19.5 from the port-edge wall, which is now 0.5 from the board):
-  X 128.2 to 198.0, connector end at Y 109.6, far end Y 9.6, top at 23 mm. Lid holes 3.6 mm for the remaining slack.
-- H8 spacer (`cad/out/spacer.stl`): 6 mm OD, 2 mm tall (jig v6: was 3), 2.8 mm hole, between the main board top and the ODD board.
+  X 128.2 to 198.0, connector end at Y 109.6, far end Y 9.6, top at 23 mm in the laptop layout. Moved 9.6 toward the port edge with the ODD board
+  (far end at Y 0.0, holes at Y 9.4 and 86.0): the ribbon with the cable clip does not reach otherwise. Lid holes 3.6 mm for the remaining slack.
+- ODD spacer (`cad/out/odd_spacer.stl`): a loose 6 mm disc, 2 mm tall (the ODD board sits 2 mm above the main board top, measured on jig v6),
+  placed on the main board top under ODD hole O6, with a 2.3 mm nub 7.8 mm long up through the 2.6 mm hole to 0.1 under the lid, so the spacer
+  can move neither up nor down once the lid is on. Replaces the drilled H8 spacer: O6 is no longer over a board hole. Prints nub up.
 - ODD cable clip (`cad/out/odd_clip_2.stl`, `cad/out/odd_clip_1.5.stl`): keeps the folded ODD ribbon cable from creasing. A 26.5 x 5.7 mm
   ring that slips onto the ODD board's pointy end: slot 22.5 wide and 1.2 tall (PCB plus ribbon, tight; 1.5 was loose), 2 mm side walls, a
   1.5 mm rectangular bar on one side of the slot and on the other a 3 mm bar between the side walls that is straight for 2 mm (or 1.5 mm,
@@ -243,7 +255,11 @@ Fill in after the colon on each line.
 - LED slit: are the LEDs visible enough through it, and is the Y position right (model: 19 and 29 from the port edge)?:
 - Base v7 printed (1.9 pilots, 45 degree SD funnel): do the M2.5 screws grip without splitting the bosses, does the funnel ceiling print clean,
   is the SD card easy to pinch:
-- Lid v3 printed (SSD 0.5 toward the DC end and 0.5 toward the port edge): posts line up, SSD holes hit, lip fit, anything touching the plate:
+- Base v8 / lid v4 printed (SSD and ODD 9.6 toward the port edge, intake row cut to 3 slots, lip cut over the SSD, 10 mm corner posts):
+  does the ribbon reach with the clip, do the ODD bosses and lid SSD holes line up, is the lid corner print clean, does the nub spacer hold:
+- Anything on the main board top under the SSD's new position (X 128 to 198, Y 0 to 10) taller than the 2.6 mm gap, or at (91.9, 121.9) where the
+  ODD spacer disc sits:
+- Board-top airflow with only 3 intake slots left: does the board top (memory, VRM) run warm standing on the audio end:
 - ODD cable clips printed (2 and 1.5 mm straight, 1.2 slot): which depth, does the slot take the board plus the ribbon, does it stay put:
 - Lid grille over the fan: enough on a shelf, or does the board top run warm (then offset it toward the board)?:
 
@@ -277,6 +293,9 @@ Answered:
 
 ## Log
 
+- 2026-11-03: SSD and ODD board 9.6 toward the port edge (ribbon reach with the clip): ODD bosses, lid SSD holes and lip follow, intake row cut
+  to the 3 slots the SSD does not cover (the audio-end wall faces the ground), ODD spacer with a nub to the lid replaces the H8 spacer, corner posts 10 mm on a 5.1 fillet so the lid chamfer
+  leaves a wall round the corner screw recesses in the first layers
 - 2026-11-03: ODD cable clip, two depths (`cad/out/odd_clip_2.stl`, `cad/out/odd_clip_1.5.stl`), slot 1.2, fold radius 1.5
 - 2026-11-03: SD funnel symmetric at 45 degrees up and down, solid block to under the lid lip, opening 54 x 18 (base v6 printed with a flat ceiling that sagged and too small a hole)
 - 2026-11-03: M2.5 pilot holes 1.9 (2.1 printed loose)
