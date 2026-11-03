@@ -102,6 +102,7 @@ stand_rail_w = 4.0       # the slot walls are two rails on the plate, this thick
 stand_wall_h = 14.0      # rail height: under the SSD screw heads, which start 15.8 above the audio-end face when the case stands on that end
 stand_w = 56.0           # plate width across the case: tips at about 12 degrees with the centre of mass 115 mm up
 stand_end_notch = 10.0   # the walls stop this short of both ends: the lid's corner screw heads (5.1 from the end faces, 6.2 recess) stick out
+stand_end_chamfer = 3.0  # on the rail ends and the LED step risers (the side profile); the 7.9 mm rail piece between them limits it
 stand_led_h = 8.0        # wall height over the LED slit (10.4 from the audio-end face) so the LEDs show when the case stands on that end
 led_y = (19.0, 29.0)     # POWER and CHARGER LEDs, side-firing on the audio-end board edge beside H5 (board-in-chassis photo, about 1 mm)
 coil_x = 104.0           # antenna cable coil on the floor beside the WiFi card, between the fan and the ODD board leg: the two half-round
@@ -400,8 +401,10 @@ def build_stand():
         r = rect(0, ln, min(s * th / 2, s * (th / 2 + stand_rail_w)), max(s * th / 2, s * (th / 2 + stand_rail_w)), stand_floor_t - 0.01, zt)
         r = r.cut(*notches)
         step_z = stand_floor_t + stand_led_h
-        r = r.chamfer(edge_chamfer, None, [e for e in r.edges() if e.center().Z > stand_floor_t + 0.5        # every edge above the plate
-                                           and not (abs(e.center().Z - step_z) < 1e-3 and e.bounding_box().size.X < 1e-3)])   # but not the concave step corners
+        above = lambda e: e.center().Z > stand_floor_t + 0.5
+        r = r.chamfer(stand_end_chamfer, None, [e for e in r.edges().filter_by(Axis.Y) if above(e)           # rail ends and step risers,
+                                                and not abs(e.center().Z - step_z) < 1e-3])                 # not the concave step corners
+        r = r.chamfer(edge_chamfer, None, [e for e in r.edges().filter_by(Axis.X) + r.edges().filter_by(Axis.Z) if above(e)])   # the rest
         rails.append(r)
     return plate.fuse(*rails)
 stand = build_stand()
