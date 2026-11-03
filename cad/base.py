@@ -398,9 +398,11 @@ def build_stand():
     rails = []
     for s in (-1, 1):
         r = rect(0, ln, min(s * th / 2, s * (th / 2 + stand_rail_w)), max(s * th / 2, s * (th / 2 + stand_rail_w)), stand_floor_t - 0.01, zt)
-        r = r.chamfer(edge_chamfer, None, [e for e in r.edges().filter_by(Axis.X)                     # lead-in on the slot side
-                                           if abs(e.center().Z - zt) < 1e-3 and abs(abs(e.center().Y) - th / 2) < 1e-3])
-        rails.append(r.cut(*notches))
+        r = r.cut(*notches)
+        step_z = stand_floor_t + stand_led_h
+        r = r.chamfer(edge_chamfer, None, [e for e in r.edges() if e.center().Z > stand_floor_t + 0.5        # every edge above the plate
+                                           and not (abs(e.center().Z - step_z) < 1e-3 and e.bounding_box().size.X < 1e-3)])   # but not the concave step corners
+        rails.append(r)
     return plate.fuse(*rails)
 stand = build_stand()
 show(stand, "stand")
