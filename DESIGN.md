@@ -109,7 +109,8 @@ Updated as measurements and decisions come in.
   A flat 243.5 x 56 x 2 mm plate (the case length, corners on the 5.1 fillet, 1 mm chamfer on the top edge) so books and the like can lie
   on it beside the case, with two 4 mm rails 14 mm tall forming a 26.3 mm slot (case 25.7 plus 0.3 a side). The rail ends and the LED
   step risers are chamfered 3 mm (the side profile; the 7.9 mm rail piece between the end gap and the step limits it), every other rail
-  edge above the plate 1 mm (lead-in on the slot side, outer top edge, vertical corners); the concave step corners stay sharp.
+  edge above the plate 1 mm (lead-in on the slot side, outer top edge, vertical corners); the concave step corners stay sharp. A 2 mm
+  45 degree gusset runs along the outside foot of each rail where it meets the plate, for strength (the slot side stays square).
   Flipping the case from one end to the other turns the lid to the other side of the slot, so both rails are notched the same: they stop
   10 mm short of both ends because the lid's corner screw heads (5.1 from the end faces) stick out of the lid, and drop to 8 mm over the
   LED slit (10.4 up from the audio-end face, Y 17 to 31 plus 2) so the LEDs show when the case stands on the audio end. The 14 mm rails
@@ -311,7 +312,7 @@ Answered:
 
 ## Log
 
-- 2026-11-04: stand slimmed to a 2 mm plate with 4 mm rails (books can lie on the plate; a third of the filament); rail edges chamfered, 3 mm on the ends
+- 2026-11-04: stand slimmed to a 2 mm plate with 4 mm rails (books can lie on the plate; a third of the filament); rail edges chamfered, 3 mm on the ends, 2 mm gusset along the outside foot
 - 2026-11-03: stand for standing the case on either end wall, ports to the back (`cad/out/stand.stl`): slotted bar, walls notched at the ends
   for the lid screw heads and over the LED slit
 - 2026-11-03: base v8: the board collides with the 10 mm port-edge corner posts. Posts flattened at 0.5 from the board's X extent, audio-end
