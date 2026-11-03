@@ -51,11 +51,13 @@ chan_t = 1.2             # not structural
 edge_clear = 0.5         # gap between PCB edge and inner wall (port edge) and to the SD funnel plate; 1.0 felt wasted (jig v6)
 fan_clear = 2.0          # gap between fan envelope and inner wall (far wall)
 dc_clear = 7.0           # gap at the DC end: the battery connector overhangs that edge about 6 mm
-audio_clear = 6.5        # gap at the audio end: room for the corner screw posts beside H5 and H6
+audio_clear = 7.0        # gap at the audio end: same as the DC end so both port-edge posts are 4.3 from the board edge (was 6.5 with 8 mm posts)
 wall_t = 2.4
 floor_t = 2.4
 post_od = 10.0           # lid screw posts in the wall, concentric with the corner fillet, floor to wall top, M3 heat-set inserts; 10 (was 8) so the
-                         # lid's corner screw recess keeps a 1 mm wall to the chamfered outer edge in the first layers (lid prints plate down)
+                         # lid's corner screw recess keeps a 1 mm wall to the chamfered outer edge in the first layers (lid prints plate down).
+                         # A 10 mm post would reach past the board edge at the port-edge corners (base v8 collided), so the posts are
+                         # flattened at edge_clear from the board's X extent: insert wall 1.8, lead-in counterbore wall 0.8 on that side
 corner_r = post_od / 2 + 0.1   # the corner posts sit just inside the fillet (coincident faces break the solid)
 edge_chamfer = 1.0       # outer edge chamfer on the case bottom and the lid top
 port_margin = 1.0        # port openings this much larger than the connector face all round
@@ -261,7 +263,8 @@ def build(wt, skeleton=False):
     adds += [post(X, Y, od, h + 0.01, floor_t - 0.01) for X, Y, od, h, d in bosses]
     adds.append(post(*wifi_nub, wifi_nub_pin_d, wifi_nub_pin_h + 0.01, floor_t + fan_boss_h["M3"] + wifi_nub_h - 0.01))
     adds += [coil_end(coil_x, coil_y[0], -1), coil_end(coil_x, coil_y[1], +1)]      # antenna cable coil ends
-    adds += [post(X, Y, post_od, case_h - floor_t + 0.01, floor_t - 0.01) for X, Y in lid_posts]    # lid screw posts, floor to wall top
+    board_x = rect(-edge_clear, L + edge_clear, y0 - 1, y1 + 1, -1, case_h + 1)     # the board's X extent plus clearance: the posts are flattened there
+    adds += [post(X, Y, post_od, case_h - floor_t + 0.01, floor_t - 0.01) - board_x for X, Y in lid_posts]    # lid screw posts, floor to wall top
     part = part.fuse(*adds)
     # screw pilots (grouped by depth) and the lid post insert holes below a lead-in counterbore, in one pass
     with BuildPart() as b:

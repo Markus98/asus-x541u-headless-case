@@ -73,10 +73,14 @@ Updated as measurements and decisions come in.
   where the SSD stands against that wall up to 0.3 under the plate. Four 10 mm screw posts in the corners, concentric with the
   5.1 mm corner fillet (0.1 inside the outer face), floor to wall top, in the four corners only (user: no posts bulging into the case elsewhere).
   They were 8 mm on a 4.1 fillet; the extra 1 mm keeps a wall round the lid's corner screw recesses in the first layers (see the chamfer below).
+  A full 10 mm post reaches past the board edge at the two port-edge corners (base v8: the board sat on the posts), so every post is
+  flattened at 0.5 from the board's X extent (`edge_clear`), like the port-edge gap. The post centres are 4.3 from the board edge at both
+  ends (audio gap 7.0 like the DC end, was 6.5), which leaves 1.8 mm round the insert hole and 0.8 mm round the lead-in counterbore
+  on the flat side. The lid is unchanged: its corner ring depends on the fillet centre, not the post diameter.
   Each has a 6 mm counterbore 2.5 deep (insert lead-in) above the 4.0 mm hole for an M3 x 5.7 heat-set insert. The lid has 5.6 mm bosses that plug
   into those counterbores, 3.4 mm holes with a 6.2 mm head recess 1.4 deep (1 mm floor over the boss), M3 x 10 button head screws sit
-  about 0.3 above the plate. End gaps 7 mm (DC, battery connector) and 6.5 mm (audio,
-  post beside H5), port-edge gap 0.5, inner 217 x 238.7, outer about 222 x 243.5 mm, total height 25.7 mm.
+  about 0.3 above the plate. End gaps 7 mm at both ends (DC: battery connector; audio: post beside H5, 6.5 until base v8),
+  port-edge gap 0.5, inner 217.5 x 238.7, outer about 222.3 x 243.5 mm, total height 25.7 mm.
   Port openings are closed windows shaped like the connectors, so the board goes in with a 3 mm slide toward the port edge.
   SSD screwed from outside: four 3.6 mm holes on the SFF-8201 bottom pattern, same 6.2 mm x 1.4 head recess (1 mm floor, SSD 0.3 below it).
   No bosses, the SSD screws straight to the plate. Lid grille over the fan. 1 mm chamfer on the case bottom edge and the lid top edge. The lid
@@ -256,7 +260,9 @@ Fill in after the colon on each line.
 - Base v7 printed (1.9 pilots, 45 degree SD funnel): do the M2.5 screws grip without splitting the bosses, does the funnel ceiling print clean,
   is the SD card easy to pinch:
 - Base v8 / lid v4 printed (SSD and ODD 9.6 toward the port edge, intake row cut to 3 slots, lip cut over the SSD, 10 mm corner posts):
-  does the ribbon reach with the clip, do the ODD bosses and lid SSD holes line up, is the lid corner print clean, does the nub spacer hold:
+  the board sat on the port-edge corner posts (fixed in v9: posts flattened at the board edge). Still to check: does the ribbon reach with
+  the clip, do the ODD bosses and lid SSD holes line up, is the lid corner print clean, does the nub spacer hold:
+- Base v9 (flattened posts, audio gap 7.0): does the board drop in:
 - Anything on the main board top under the SSD's new position (X 128 to 198, Y 0 to 10) taller than the 2.6 mm gap, or at (91.9, 121.9) where the
   ODD spacer disc sits:
 - Board-top airflow with only 3 intake slots left: does the board top (memory, VRM) run warm standing on the audio end:
@@ -293,6 +299,8 @@ Answered:
 
 ## Log
 
+- 2026-11-03: base v8: the board collides with the 10 mm port-edge corner posts. Posts flattened at 0.5 from the board's X extent, audio-end
+  gap 7.0 (was 6.5) so both port-edge posts keep a wall round the insert hole; case 0.5 longer. Base v9 exported.
 - 2026-11-03: SSD and ODD board 9.6 toward the port edge (ribbon reach with the clip): ODD bosses, lid SSD holes and lip follow, intake row cut
   to the 3 slots the SSD does not cover (the audio-end wall faces the ground), ODD spacer with a nub to the lid replaces the H8 spacer, corner posts 10 mm on a 5.1 fillet so the lid chamfer
   leaves a wall round the corner screw recesses in the first layers
