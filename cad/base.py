@@ -96,6 +96,12 @@ clip_bend_r = 1.5        # the bar on one side of the slot ends in a full half r
 clip_wall = 2.0          # beside the slot
 clip_bar_t = 1.5         # the rectangular bar on the other side of the slot
 clip_ext = (2.0, 1.5)    # two versions: straight depth along the board before the half round (total depth clip_ext + clip_bend_r)
+stand_clear = 0.3        # stand: slot to the case thickness, per side
+stand_floor_t = 4.0
+stand_wall_h = 14.0      # slot depth: under the SSD screw heads, which start 15.8 above the audio-end face when the case stands on that end
+stand_w = 56.0           # footprint across the case: tips at about 12 degrees with the centre of mass 115 mm up
+stand_end_notch = 10.0   # the walls stop this short of both ends: the lid's corner screw heads (5.1 from the end faces, 6.2 recess) stick out
+stand_led_h = 8.0        # wall height over the LED slit (10.4 from the audio-end face) so the LEDs show when the case stands on that end
 led_y = (19.0, 29.0)     # POWER and CHARGER LEDs, side-firing on the audio-end board edge beside H5 (board-in-chassis photo, about 1 mm)
 coil_x = 104.0           # antenna cable coil on the floor beside the WiFi card, between the fan and the ODD board leg: the two half-round
 coil_y = (190.0, 226.0)  # ends of a pill (C walls), centres; the cable winds round both, 36 mm apart
@@ -376,4 +382,22 @@ def build_odd_clip(ext):
 
 for ext in clip_ext:
     show(build_odd_clip(ext), "odd_clip_%g" % ext)
+
+# --- stand: the case stands on either end wall, IO to the back, in a slot along its length. Flipping the case between its two ends
+# turns the lid to the other side of the slot, so both walls get the same notches. Stand frame: X along the case from the port-edge
+# face, Y across the slot, Z up. Prints as is. ---
+def build_stand():
+    ln, th, h = y1 - y0 + 2 * wall_t, case_h + lid_t + 2 * stand_clear, stand_floor_t + stand_wall_h
+    body = rect(0, ln, -stand_w / 2, stand_w / 2, 0, h)
+    body = body.fillet(corner_r, body.edges().filter_by(Axis.Z))
+    body = body.chamfer(edge_chamfer, None, body.edges().group_by(Axis.Z)[-1])
+    body = body - rect(-1, ln + 1, -th / 2, th / 2, stand_floor_t, h + 1)
+    body = body.chamfer(edge_chamfer, None, [e for e in body.edges().filter_by(Axis.X)                 # lead-in on the slot
+                                             if abs(e.center().Z - h) < 1e-3 and abs(abs(e.center().Y) - th / 2) < 1e-3])
+    xl = (led_y[0] - led_slit_margin - (y0 - wall_t) - 2, led_y[1] + led_slit_margin - (y0 - wall_t) + 2)   # LED slit, 2 mm past its ends
+    for xa, xb, za in [(-1, stand_end_notch, stand_floor_t), (ln - stand_end_notch, ln + 1, stand_floor_t), (xl[0], xl[1], stand_floor_t + stand_led_h)]:
+        body = body - rect(xa, xb, -stand_w, stand_w, za, h + 1)
+    return body
+stand = build_stand()
+show(stand, "stand")
 result = base

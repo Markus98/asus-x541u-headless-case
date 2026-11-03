@@ -105,6 +105,13 @@ Updated as measurements and decisions come in.
   the second version) along the board and then ends in a full half round of 1.5 mm radius, round face outward, for the cable to fold round.
   Total depth 3.5 (3.0) mm, the side walls flush with the half round's apex. Prints flat on the inner face (the half round is a dome on top,
   no overhang). ODD PCB thickness assumed 1.0 like the main board.
+- Stand (`cad/out/stand.stl`): the case stands vertically on either end wall with the ports to the back, in a slot along its length.
+  A 243.5 x 56 x 18 mm bar (the case length, corners on the 5.1 fillet, 1 mm chamfers) with a 26.3 mm slot (case 25.7 plus 0.3 a side),
+  4 mm floor, 14 mm walls with a 1 mm lead-in. Flipping the case from one end to the other turns the lid to the other side of the slot, so
+  both walls are notched the same: the walls stop 10 mm short of both ends because the lid's corner screw heads (5.1 from the end faces)
+  stick out of the lid, and drop to 8 mm over the LED slit (10.4 up from the audio-end face, Y 17 to 31 plus 2) so the LEDs show when the
+  case stands on the audio end. The 14 mm walls stay under the SSD screw heads (15.8 above the audio-end face). The slot is open at both
+  ends: nothing in front of the ports or the far wall. Prints slot up.
 - WiFi nub pin 2.0 mm for slack.
 - WiFi antennas: the original lid flaps are the antennas (MAIN also carries Bluetooth); they go on the floor beside the SSD board. The cable
   slack coils round two C-shaped ends of a pill on the floor beside the WiFi card, in the free strip between the fan and the ODD board leg:
@@ -267,6 +274,8 @@ Fill in after the colon on each line.
   ODD spacer disc sits:
 - Board-top airflow with only 3 intake slots left: does the board top (memory, VRM) run warm standing on the audio end:
 - ODD cable clips printed (2 and 1.5 mm straight, 1.2 slot): which depth, does the slot take the board plus the ribbon, does it stay put:
+- Stand v1 printed (26.3 slot, 14 mm walls, notches at the ends and over the LED slit): does the case slide in, is it stable on either end,
+  do the screw heads clear, are the LEDs visible:
 - Lid grille over the fan: enough on a shelf, or does the board top run warm (then offset it toward the board)?:
 
 Answered:
@@ -299,6 +308,8 @@ Answered:
 
 ## Log
 
+- 2026-11-03: stand for standing the case on either end wall, ports to the back (`cad/out/stand.stl`): slotted bar, walls notched at the ends
+  for the lid screw heads and over the LED slit
 - 2026-11-03: base v8: the board collides with the 10 mm port-edge corner posts. Posts flattened at 0.5 from the board's X extent, audio-end
   gap 7.0 (was 6.5) so both port-edge posts keep a wall round the insert hole; case 0.5 longer. Base v9 exported.
 - 2026-11-03: SSD and ODD board 9.6 toward the port edge (ribbon reach with the clip): ODD bosses, lid SSD holes and lip follow, intake row cut
