@@ -82,10 +82,11 @@ pp["ports"] = {k: dict(v, x=[v["x"][0] + port_dx.get(k, 0.0), v["x"][1] + port_d
                        z_top=round(v["z_top"] + port_dz[k], 2), z_bottom=round(v["z_bottom"] + port_dz[k], 2), shape=port_shape.get(k, v["shape"])) for k, v in R.items()}
 json.dump(pp, open("measurements/port_profiles_mm.json", "w"), indent=1)
 # SSD measured on the jig v5 (ruler, holes on the SFF-8201 pattern, drive square to the case): the hole nearest the audio-end wall is 15.5 from
-# that wall (model 18.6) and the hole nearest the audio port is 20.5 from the port-edge wall (model 23.0)
+# that wall (model 18.6) and the hole nearest the audio port is 20.5 from the port-edge wall (model 23.0).
+# Lid v2 ruler check: 16 from the audio-end wall and 19.5 from the port-edge wall (now 0.5 from the board), so 0.5 back toward the DC end and 0.5 toward the port edge.
 sd = json.load(open("measurements/ssd_mm.json"))
 S = sd.get("photo", {k: sd[k] for k in ["x_from", "x_to", "y_connector_end", "y_far_end", "bottom_holes"]}); sd["photo"] = S
-ssd_dx, ssd_dy = 3.1, -2.5
+ssd_dx, ssd_dy = 3.1 - 0.5, -2.5 - 0.5
 sd.update(x_from=round(S["x_from"] + ssd_dx, 1), x_to=round(S["x_to"] + ssd_dx, 1), y_connector_end=round(S["y_connector_end"] + ssd_dy, 1),
           y_far_end=round(S["y_far_end"] + ssd_dy, 1), bottom_holes=[r([h[0] + ssd_dx, h[1] + ssd_dy]) for h in S["bottom_holes"]])
 json.dump(sd, open("measurements/ssd_mm.json", "w"), indent=1)

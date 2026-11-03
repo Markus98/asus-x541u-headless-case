@@ -25,7 +25,7 @@ Updated as measurements and decisions come in.
 
 - Mounting: reuse the laptop's M2.5 screws
 - Screws thread directly into printed holes, no inserts
-  - Pilot hole 2.1 mm (print test coupon first, adjust 2.0 to 2.2 by material)
+  - Pilot hole 1.9 mm, the M2.5 minor diameter (2.1 printed loose at 0.2 mm layers)
   - Boss outer diameter 6 mm minimum, thread depth at least screw length + 1 mm
 - Stack, bottom up: printed base with 10 mm standoffs, the 10 mm air layer holds the fan, the CPU heatsink and the
   ports (all on the board's underside), then the main board, later the ODD board and SSD on top of the board, then a printed lid.
@@ -49,11 +49,13 @@ Updated as measurements and decisions come in.
   rounded rectangle (1.5 mm corners), VGA 0.5 up. The port-edge wall sits 0.5 from the board edge (was 1).
   SD slot: window in the audio-end wall at Y 32.5 to 62.5, z 9.4 to 13.4 (v3 print: shifted 3.5 toward the port-edge corner; jig v5: 1 mm smaller all round).
   Because that wall is 6.5 from the board edge, the wall steps in there as a rectangular funnel (`sd_funnel` in `cad/base.py`): a flat plate
-  0.5 mm from the board edge carries the slot (30 x 4, 1.5 corner radius) with 4 mm (Y) and 2.5 mm (Z) of flat area around it for fingers beside
-  the card (plate opening 38 x 9), and from the plate edge the funnel flares a further 4 mm per side in Y and 4 mm downward out to the outer
-  wall face (46 x 13 there), wall thickness 2.4 across the sloped faces (lofted sections grown by t / cos of the taper angle). For printing
-  (base stands on its floor): the ceiling is flat, a 6 mm bridge, and the whole funnel is filled solid down to the floor so nothing hangs
-  (jig v6 had the plate's bottom edge floating). Top stays 2.5 under the lid lip. Same funnel in the jig with its thinner wall, on a floor bar.
+  0.5 mm from the board edge carries the slot (30 x 4, 1.5 corner radius) with 6 mm (Y) and 1.5 mm (Z) of flat area around it for fingers beside
+  the card (plate opening 42 x 7), and from the plate's outer face the funnel flares at 45 degrees per side in Y and up and down in Z out to the
+  outer wall face, 6 mm over the 6 mm run (54 x 18 there, Z 2.9 to 20.9). For printing (base stands on its floor) the ceiling is the steepest
+  overhang at 45 degrees, there is no flat ceiling (the earlier flat one was a 6 mm bridge that sagged), and the funnel is a solid block from
+  the floor to 0.2 under the lid lip so nothing floats. The downward flare stops 0.5 above the floor top (a short flat floor at the outer face
+  is upward facing, so it prints fine). The 1.5 mm Z flat is all the 45 degree ceiling leaves: it reaches 20.9 at the outer face under the
+  2.4 mm wall top. Same funnel in the jig with its thinner wall, on a floor bar.
 - Vents, for bookshelf use (only the port edge and the lid open): exhaust slots in the port-edge wall between the channel walls, the full under-board
   layer (4 slots 14 mm wide, 1.5 mm ribs, z 3.4 to 11.4, about 450 mm2 of the 613 mm2 channel section); intake slots in the same wall above the ports only
   (z 17.2 to 20.4, X 112 to 200.5, about 216 mm2), none above the exhaust to limit recirculation and none above the RJ45 window (its lifted top reaches 17.6),
@@ -78,8 +80,15 @@ Updated as measurements and decisions come in.
   faces the SD funnel plate 0.5 mm away, so its side light is mostly blocked; the packages are still visible from above.
 - SSD: bottom (hole side) up, plugged into the ODD board, position measured from the chassis photo (`tools/measure_ssd.py`, `measurements/ssd_mm.json`):
   then corrected on the v5 jig with a ruler (hole nearest the audio-end wall 15.5 from it, hole nearest the audio port 20.5 from the port-edge wall;
-  the photo was 3.1 off in X and 2.5 in Y): X 128.7 to 198.5, connector end at Y 110.1, far end Y 10.1, top at 23 mm. Lid holes 3.6 mm for the remaining slack.
+  the photo was 3.1 off in X and 2.5 in Y), then on lid v2 (16 from the audio-end wall, 19.5 from the port-edge wall, which is now 0.5 from the board):
+  X 128.2 to 198.0, connector end at Y 109.6, far end Y 9.6, top at 23 mm. Lid holes 3.6 mm for the remaining slack.
 - H8 spacer (`cad/out/spacer.stl`): 6 mm OD, 2 mm tall (jig v6: was 3), 2.8 mm hole, between the main board top and the ODD board.
+- ODD cable clip (`cad/out/odd_clip_2.stl`, `cad/out/odd_clip_1.5.stl`): keeps the folded ODD ribbon cable from creasing. A 26.5 x 5.7 mm
+  ring that slips onto the ODD board's pointy end: slot 22.5 wide and 1.2 tall (PCB plus ribbon, tight; 1.5 was loose), 2 mm side walls, a
+  1.5 mm rectangular bar on one side of the slot and on the other a 3 mm bar between the side walls that is straight for 2 mm (or 1.5 mm,
+  the second version) along the board and then ends in a full half round of 1.5 mm radius, round face outward, for the cable to fold round.
+  Total depth 3.5 (3.0) mm, the side walls flush with the half round's apex. Prints flat on the inner face (the half round is a dome on top,
+  no overhang). ODD PCB thickness assumed 1.0 like the main board.
 - WiFi nub pin 2.0 mm for slack.
 - WiFi antennas: the original lid flaps are the antennas (MAIN also carries Bluetooth); they go on the floor beside the SSD board. The cable
   slack coils round two C-shaped ends of a pill on the floor beside the WiFi card, in the free strip between the fan and the ODD board leg:
@@ -232,10 +241,16 @@ Fill in after the colon on each line.
 
 - Jig v7 / IO jig printed (USB-C rounded rectangle, VGA up, wall 0.5 from the board, WiFi nub +1): what still does not fit (hole, direction, mm):
 - LED slit: are the LEDs visible enough through it, and is the Y position right (model: 19 and 29 from the port edge)?:
-- Lid v1 printed: posts line up, SSD holes hit (direction, mm), lip fit, anything touching the plate:
+- Base v7 printed (1.9 pilots, 45 degree SD funnel): do the M2.5 screws grip without splitting the bosses, does the funnel ceiling print clean,
+  is the SD card easy to pinch:
+- Lid v3 printed (SSD 0.5 toward the DC end and 0.5 toward the port edge): posts line up, SSD holes hit, lip fit, anything touching the plate:
+- ODD cable clips printed (2 and 1.5 mm straight, 1.2 slot): which depth, does the slot take the board plus the ribbon, does it stay put:
 - Lid grille over the fan: enough on a shelf, or does the board top run warm (then offset it toward the board)?:
 
 Answered:
+
+- Lid v2 (2026-11-03): SSD holes measured on the lid, hole nearest the audio-end wall 16 from the inside wall, hole nearest the port edge 19.5
+  from the port-edge inside wall (model had 15.5 and 20.0).
 
 - Jig v6 (2026-11-02): USB-C 0.5 down and 0.5 right, as a rounded rectangle rather than a pill; VGA 0.5 up; port-edge wall and SD funnel plate
   0.5 from the board instead of 1 (wasted space). Fan hub centre on the jig: 47 from the DC-end inside wall, 44.5 from the far inside wall
@@ -262,6 +277,10 @@ Answered:
 
 ## Log
 
+- 2026-11-03: ODD cable clip, two depths (`cad/out/odd_clip_2.stl`, `cad/out/odd_clip_1.5.stl`), slot 1.2, fold radius 1.5
+- 2026-11-03: SD funnel symmetric at 45 degrees up and down, solid block to under the lid lip, opening 54 x 18 (base v6 printed with a flat ceiling that sagged and too small a hole)
+- 2026-11-03: M2.5 pilot holes 1.9 (2.1 printed loose)
+- 2026-11-03: SSD 0.5 toward the DC end and 0.5 toward the port edge (ruler on lid v2), lid v3 exported
 - 2026-11-02: antenna cable coil ends beside the WiFi card
 - 2026-11-02: SD funnel printable without supports: solid down to the floor, flat ceiling, flare downward only
 - 2026-11-02: LED peek slit in the lid (1 mm, flared inside), WiFi nub boss 1 mm higher, H8 spacer 2 mm

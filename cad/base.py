@@ -25,15 +25,15 @@ port_x = [[2.0, 10.0], [15.7, 23.5], [91.0, 109.5], [116.75, 133.25], [137.75, 1
 port_profiles = {"dc": {"x": [2.0, 10.0], "z_top": 4.4, "z_bottom": -0.5, "face_w": 8.0, "shape": "circle", "d": 9.0}, "usbc": {"x": [15.7, 23.5], "z_top": 4.7, "z_bottom": 0.7, "face_w": 8.9, "shape": "rrect"}, "rj45": {"x": [91.0, 109.5], "z_top": 4.2, "z_bottom": -9.8, "face_w": 16.0, "shape": "rect"}, "vga": {"x": [116.75, 133.25], "z_top": 1.9, "z_bottom": -5.7, "face_w": 16.9, "shape": "dsub"}, "hdmi": {"x": [137.75, 153.0], "z_top": 2.3, "z_bottom": -2.6, "face_w": 15.0, "shape": "hdmi"}, "usb3": {"x": [156.5, 169.5], "z_top": 3.1, "z_bottom": -3.6, "face_w": 13.1, "shape": "rect"}, "usb2": {"x": [174.5, 188.0], "z_top": 3.1, "z_bottom": -3.8, "face_w": 13.1, "shape": "rect"}, "audio": {"x": [194.5, 198.5], "z_top": 2.9, "z_bottom": -2.5, "face_w": 6.8, "shape": "circle"}}     # z relative to the PCB underside, from img1106
 odd_mounts = {"O1": [193.9, 115.1], "O7": [140.5, 207.0]}     # ODD board holes O1 and O7 in the board frame (O6 sits on H8)
 odd_boss_h = 14.0
-ssd_x = (128.7, 198.5); ssd_y = (10.1, 110.1); ssd_z_top = 23.0     # SSD, bottom (hole side) up
-ssd_holes = [[132.7, 96.1], [194.5, 96.1], [132.7, 19.5], [194.5, 19.5]]     # SFF-8201 bottom holes, M3
+ssd_x = (128.2, 198.0); ssd_y = (9.6, 109.6); ssd_z_top = 23.0     # SSD, bottom (hole side) up
+ssd_holes = [[132.2, 95.6], [194.0, 95.6], [132.2, 19.0], [194.0, 19.0]]     # SFF-8201 bottom holes, M3
 # END board params
 pcb_t = 1.0              # mm PCB thickness
 
 # --- case parameters (mm) ---
 standoff_h = 10.0        # floor top to PCB underside (laptop value)
 boss_od = 6.0
-pilot_d = 2.1            # M2.5 thread-forming in PETG; tune with a test coupon
+pilot_d = 1.9            # M2.5 thread-forming in PETG, the thread's minor diameter: 2.1 printed loose at 0.2 mm layers
 pilot_depth = 7.0        # screw 6 mm - PCB 1 mm + 2
 unused_holes = ["H2", "H7"]       # no chassis post in the laptop, left free
 fan_ear_on_board = "H9"            # fan ear M1 is clamped under the board by the H9 screw
@@ -59,9 +59,11 @@ edge_chamfer = 1.0       # outer edge chamfer on the case bottom and the lid top
 port_margin = 1.0        # port openings this much larger than the connector face all round
 sd_y = (32.5, 62.5)      # SD slot window on the audio-end wall (Y extent); 3.5 toward the port-edge corner after the v3 print, 1 smaller all round after jig v5
 sd_z_from = 7.0          # window from this height above the floor, up to the PCB top
-sd_flat = (4.0, 2.5)     # SD funnel: flat plate around the slot at the board edge, this much per side (Y, Z) beyond the slot (finger room beside the card)
-sd_flare = (4.0, 4.0)    # from the plate edge the funnel flares out by this much to the outer wall face: per side in Y, and downward in Z
-                         # (the ceiling stays flat so it prints as a short bridge; the funnel stands on the floor, no overhang under it)
+sd_flat = (6.0, 1.5)     # SD funnel: flat plate around the slot at the board edge, this much per side (Y, Z) beyond the slot (finger room beside the card);
+                         # Z is what the 45 degree ceiling leaves under the lid lip
+sd_flare_deg = 45.0      # from the plate edge the funnel flares out at this angle per side in Y and up and down in Z to the outer wall face: the
+                         # ceiling is the steepest overhang when the base prints on its floor; the funnel is solid from the floor to under the lid lip
+sd_floor_margin = 0.5    # the downward flare stops this far above the floor top
 sd_corner_r = 1.5        # corner radius of the slot opening
 grille_hole_d = 4.5      # floor grille of round holes under the fan intake opening
 grille_pitch = 6.5
@@ -81,6 +83,12 @@ lip_clear = 0.2          # lip to inner wall face and to the posts
 lid_clear = 0.3          # wall top (lid underside) above the SSD top: the SSD screws straight to the plate, no bosses (user: as thin as possible)
 ssd_hole_d = 3.6         # a little loose for the photo-based SSD position
 spacer_h, spacer_od, spacer_hole = 2.0, 6.0, 2.8   # H8 spacer between the main board top and the ODD board (2 mm measured on jig v6, was 3)
+clip_slot_w = 22.5       # ODD cable clip: slips onto the ODD board's pointy end; the folded ribbon cable goes through with the board
+clip_slot_h = 1.2        # PCB plus the ribbon cable, tight (1.5 was loose)
+clip_bend_r = 1.5        # the bar on one side of the slot ends in a full half round of this radius (3 mm diameter) for the cable to fold round
+clip_wall = 2.0          # beside the slot
+clip_bar_t = 1.5         # the rectangular bar on the other side of the slot
+clip_ext = (2.0, 1.5)    # two versions: straight depth along the board before the half round (total depth clip_ext + clip_bend_r)
 led_y = (19.0, 29.0)     # POWER and CHARGER LEDs, side-firing on the audio-end board edge beside H5 (board-in-chassis photo, about 1 mm)
 coil_x = 104.0           # antenna cable coil on the floor beside the WiFi card, between the fan and the ODD board leg: the two half-round
 coil_y = (190.0, 226.0)  # ends of a pill (C walls), centres; the cable winds round both, 36 mm apart
@@ -187,31 +195,34 @@ for X, Y in odd_mounts.values():
 bosses.append((*wifi_nub, boss_od, fan_boss_h["M3"] + wifi_nub_h, 0.0))     # no screw, pin added below
 
 def sd_funnel(wt):
-    """SD slot as a rectangular funnel in the audio-end wall: a flat plate edge_clear from the board edge carries the slot with sd_flat of
-    flat area around it, and from the plate edge the funnel flares out to a bigger opening at the outer wall face, wall thickness wt all
-    round. Returns (shell to fuse, pockets to cut)."""
+    """SD slot as a rectangular funnel in the audio-end wall: a plate edge_clear from the board edge carries the slot with sd_flat of flat
+    area around it, and from the plate's outer face the opening flares at sd_flare_deg per side in Y and up and down in Z to the outer wall
+    face. The funnel is a solid block from the floor to just under the lid lip, so when the base prints on its floor nothing in it overhangs
+    more than the flare angle (the downward flare stops sd_floor_margin above the floor top). Returns (block to fuse, pockets to cut)."""
     xa, xb = L + edge_clear, x1 + wt                       # plate inner face, outer wall face
     xp = xa + wt                                           # plate outer face, where the flare starts
+    run = xb - xp
+    f = run * math.tan(math.radians(sd_flare_deg))         # flare per side over the run
     w, h = sd_y[1] - sd_y[0], z_pcb_top - (floor_t + sd_z_from)
     yc, zc = (sd_y[0] + sd_y[1]) / 2, (floor_t + sd_z_from + z_pcb_top) / 2
-    def section(x, gy, gdn, gup, r):
-        """Rounded rectangle on the YZ plane at x: the slot grown by gy per side, gdn downward and gup upward."""
-        return Plane((x, yc, zc + (gup - gdn) / 2), x_dir=(0, 1, 0), z_dir=(1, 0, 0)) * RectangleRounded(w + 2 * gy, h + gdn + gup, r)
-    def fill(x, gy):
-        """Plain rectangle from the floor up to the slot centre: the funnel stands on the floor, nothing overhangs under it."""
+    def section(x, gy, gz, r):
+        """Rounded rectangle on the YZ plane at x: the slot grown by gy per side in Y and gz up and down."""
+        return Plane((x, yc, zc), x_dir=(0, 1, 0), z_dir=(1, 0, 0)) * RectangleRounded(w + 2 * gy, h + 2 * gz, r)
+    def block(x, hy, zt):
+        """Plain rectangle on the YZ plane at x from the floor up to zt, half-width hy."""
         zb = floor_t - 0.01
-        return Plane((x, yc, (zb + zc) / 2), x_dir=(0, 1, 0), z_dir=(1, 0, 0)) * Rectangle(w + 2 * gy, zc - zb)
-    (py, pz), (fy, fz) = sd_flat, sd_flare                 # fz flares downward only, the ceiling stays flat (short bridge when printing)
-    ty, tz = wt / math.cos(math.atan(fy / (xb - xp))), wt / math.cos(math.atan(fz / (xb - xp)))   # grow per side for wt across the sloped faces
-    k = (xb + 1 - xp) / (xb - xp)                          # pocket extended 1 past the outer face for a clean cut
+        return Plane((x, yc, (zb + zt) / 2), x_dir=(0, 1, 0), z_dir=(1, 0, 0)) * Rectangle(2 * hy, zt - zb)
+    py, pz = sd_flat
+    t = wt / math.cos(math.radians(sd_flare_deg))          # side wall grown by this for wt across the sloped faces
+    k = (xb + 1 - xp) / run                                # pocket extended 1 past the outer face for a clean cut
     r = sd_corner_r + min(py, pz)
-    pocket = loft([section(xp, py, pz, pz, r), section(xb + 1, py + fy * k, pz + fz * k, pz, r)], ruled=True)
-    slot = extrude(section(xa - 1, 0, 0, 0, sd_corner_r), amount=wt + 2)
-    shell = loft([section(xa, py + ty, pz + tz, pz + wt, r + wt), section(xp, py + ty, pz + tz, pz + wt, r + wt),
-                  section(xb, py + fy + ty, pz + fz + tz, pz + wt, r + wt)], ruled=True)
-    shell = shell & rect(xa - 1, xb + 1, y0 - 50, y1 + 50, floor_t - 0.01, case_h)      # not below the floor top (keeps the bottom chamfer intact)
-    shell = shell.fuse(loft([fill(xa, py + ty), fill(xp, py + ty), fill(xb, py + fy + ty)], ruled=True))
-    return shell, [pocket, slot]
+    pocket = loft([section(xp, py, pz, r), section(xb + 1, py + f * k, pz + f * k, r)], ruled=True)
+    pocket = pocket & rect(xp - 1, xb + 2, y0 - 50, y1 + 50, floor_t + sd_floor_margin, case_h + 1)
+    slot = extrude(section(xa - 1, 0, 0, sd_corner_r), amount=wt + 2)
+    zt, xo = case_h - lip_h - lip_clear, x1 + 0.5          # block top under the lid lip; block ends inside the main wall
+    hy = w / 2 + py + t
+    body = loft([block(xa, hy, zt), block(xp, hy, zt), block(xo, hy + f * (xo - xp) / run, zt)], ruled=True)
+    return body, [pocket, slot]
 
 def build(wt, skeleton=False):
     """Base with wall thickness wt. skeleton=True: fit jig, floor replaced by bars, lower walls."""
@@ -332,4 +343,20 @@ show(lid_jig, "lid_jig")
 # --- spacer between the main board top and the ODD board at H8 ---
 spacer = Cylinder(spacer_od / 2, spacer_h, align=(Align.CENTER, Align.CENTER, Align.MIN)) - Cylinder(spacer_hole / 2, spacer_h + 2, align=(Align.CENTER, Align.CENTER, Align.MIN)).move(Location((0, 0, -1)))
 show(spacer, "spacer")
+
+# --- ODD cable clip: a ring that slips onto the ODD board's pointy end, the cable through the slot with the board ---
+# Z along the board, Y across the thickness: rectangular bar, slot, then the bar between the side walls that is straight for ext and ends
+# in a half round on the outer side, where the cable folds round it. Prints flat on the inner face (the half round is a dome on top).
+def build_odd_clip(ext):
+    w, r = clip_slot_w + 2 * clip_wall, clip_bend_r
+    h, depth, yb = clip_bar_t + clip_slot_h + 2 * r, ext + r, clip_bar_t + clip_slot_h
+    ring = Box(w, h, depth, align=(Align.CENTER, Align.MIN, Align.MIN))
+    ring = ring - Box(clip_slot_w, clip_slot_h + 2 * r + 1, depth + 2, align=(Align.CENTER, Align.MIN, Align.MIN)).move(Location((0, clip_bar_t, -1)))
+    bar = Box(clip_slot_w, 2 * r, ext, align=(Align.CENTER, Align.MIN, Align.MIN)).move(Location((0, yb, 0)))
+    rnd = Cylinder(r, clip_slot_w, align=(Align.CENTER, Align.CENTER, Align.CENTER)).rotate(Axis.Y, 90)    # axis along X, ends on the side walls (buried ends leave open edges where the apex grazes the wall top)
+    rnd = rnd.move(Location((0, yb + r, ext))) & Box(w, h, r + 1, align=(Align.CENTER, Align.MIN, Align.MIN)).move(Location((0, 0, ext)))   # keep the outward half
+    return ring + bar + rnd
+
+for ext in clip_ext:
+    show(build_odd_clip(ext), "odd_clip_%g" % ext)
 result = base
