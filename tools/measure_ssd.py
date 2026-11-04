@@ -1,10 +1,10 @@
-"""SSD position relative to the ODD board, from the chassis photo (img1108) where the SSD is plugged in.
+"""SSD position relative to the ODD board, from the chassis photo (05-chassis-without-board) where the SSD is plugged in.
 Rectifies the photo to board mm with the chassis affine, detects the SSD rectangle and the ODD board's
 pad holes, fits the ODD frame (odd_mm.json, BOT view; the chassis shows TOP so the fit is mirrored) and
 writes the SSD outline in the ODD frame and in the case frame to measurements/ssd_mm.json."""
 import json, cv2, numpy as np
-Af = np.load("measurements/img1108_affine.npy"); A3 = np.vstack([Af, [0, 0, 1]])
-img = cv2.imread("photos/img1108-full.jpg")
+Af = np.load("measurements/05-chassis-without-board_affine.npy"); A3 = np.vstack([Af, [0, 0, 1]])
+img = cv2.imread("photos/05-chassis-without-board-full.jpg")
 s = 10; X0, X1, Y0, Y1 = 60, 215, 120, 350
 T = np.array([[s, 0, -X0 * s], [0, -s, Y1 * s], [0, 0, 1.0]])
 w = cv2.warpPerspective(img, T @ np.linalg.inv(A3), ((X1 - X0) * s, (Y1 - Y0) * s))
@@ -58,7 +58,7 @@ print("flip fit: Y' = %.1f - Y, X' = X + %.1f, residuals (mm)" % (a, bb), res)
 case = np.c_[corr[:, 0] + bb, a - corr[:, 1]]
 xa, xb = case[:, 0].min(), case[:, 0].max(); yc = case[:, 1].max()           # connector end is the +Y end after the flip
 xa = (xa + xb) / 2 - W_std / 2                                                 # standard width centred on the measured sides
-out = {"note": "SSD in the case frame, bottom (hole side) up, connector end toward +Y, from img1108 via tools/measure_ssd.py",
+out = {"note": "SSD in the case frame, bottom (hole side) up, connector end toward +Y, from 05-chassis-without-board via tools/measure_ssd.py",
        "x_from": round(float(xa), 1), "x_to": round(float(xa + W_std), 1), "y_connector_end": round(float(yc), 1), "y_far_end": round(float(yc - L_std), 1),
        "z_top": 23.0, "thickness": 7.0,
        "bottom_holes": [[round(float(xa + dx), 1), round(float(yc - dy), 1)] for dy in (14.0, 90.6) for dx in (4.07, W_std - 4.07)],

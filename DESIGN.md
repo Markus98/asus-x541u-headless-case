@@ -14,12 +14,15 @@ Updated as measurements and decisions come in.
 - SD card reader on the back side at the audio-jack end edge (slot opens at that edge)
 - Fan is chassis-mounted beside the board, not on the board. WiFi card hangs about 25 mm past the board edge.
 - Photos in `photos/` (HEIC originals plus JPEG conversions, `*-full.jpg` is full resolution)
-  - `board-in-chassis.jpg`: fan side, original layout
-  - `img1104.jpg`: fan side, ODD board flipped over the main board with SSD, the intended layout
-  - `img1106.jpg`: port edge side profile
-  - `img1107.jpg`: back side, SD reader corner
-  - `img1108.jpg`: chassis with main board removed, ODD board and SSD in place
-  - `img1109.jpg`: bare main board, back side, used for the computational measurements
+  - `01-board-in-chassis.jpg`: fan side, original layout
+  - `02-chassis-odd-flipped-ssd.jpg`: fan side, ODD board flipped over the main board with SSD, the intended layout
+  - `03-port-edge-profile.jpg`: port edge side profile
+  - `04-board-back-sd-corner.jpg`: back side, SD reader corner
+  - `05-chassis-without-board.jpg`: chassis with main board removed, ODD board and SSD in place
+  - `06-board-underside.jpg`: bare main board, back side, used for the computational measurements
+  - `07-odd-board-caliper.jpg`: ODD daughterboard, BOT side up, with a caliper for scale
+  - `08-fan-caliper.jpg`: fan with a caliper (strong perspective, not used for sizes)
+  - `09-board-in-jig.jpg`: main board, flipped ODD board and fan sitting in the printed jig
 
 ## Decisions
 
@@ -29,8 +32,8 @@ Updated as measurements and decisions come in.
   - Boss outer diameter 6 mm minimum, thread depth at least screw length + 1 mm
 - Stack, bottom up: printed base with 10 mm standoffs, the 10 mm air layer holds the fan, the CPU heatsink and the
   ports (all on the board's underside), then the main board, later the ODD board and SSD on top of the board, then a printed lid.
-- Case frame = board frame: x = X (DC end at x=0), y = Y (port edge at y=0), z up. Plan view is `photos/board-in-chassis.jpg`
-  rotated 90 degrees counter-clockwise. `photos/img1109.jpg` shows the underside.
+- Case frame = board frame: x = X (DC end at x=0), y = Y (port edge at y=0), z up. Plan view is `photos/01-board-in-chassis.jpg`
+  rotated 90 degrees counter-clockwise. `photos/06-board-underside.jpg` shows the underside.
 - Case footprint is a rectangle: board plus the fan area, inner 217 x 238.7 mm, outer about 222 x 243.5 mm.
 - Fan sits on the floor, flat face (big opening) up at PCB-underside level. Ear M1 is clamped under the board by the H9 screw
   (H9 boss 9 mm), M2 on an 8.4 mm boss, M3 (the ear next to the board) on a 4.5 mm boss. After the v4 jig M2 and M3 were rotated 1.2 degrees about H9
@@ -45,7 +48,7 @@ Updated as measurements and decisions come in.
   clip the ribbon no longer reaches the laptop position. Its own 14 mm bosses at O1 (193.9, 105.5, the corner hole of the three) and
   O7 (140.5, 197.4, on H10's X line, the pointy-end hole). O6 (91.9, 121.9) is now over the main board with no hole under it: a loose
   2 mm spacer disc sits there under the ODD board with a nub up through the hole to the lid (see the ODD spacer below).
-- Port openings follow each connector face (shape, height and vertical position from the profile photo `img1106`, `tools/port_profiles.py`),
+- Port openings follow each connector face (shape, height and vertical position from the profile photo `03-port-edge-profile`, `tools/port_profiles.py`),
   1 mm margin all round, never below the floor top. DC jack: 9 mm round hole centred on the jack face (plug boot; adjust `d` if the plug is fatter). RJ45 does not hang below the standoff plane (mid-mount), no floor pocket.
   After the v5 jig every window moved: all lifted (DC 1.5, USB-C 2.5, RJ45 and audio 1, the rest 0.5), DC and USB-C 1 toward the DC corner, VGA 0.5 toward HDMI
   (`tools/apply_print_feedback.py`, directions as seen from outside with the DC jack on the left). Jig v6: USB-C 0.5 right and 0.5 down as a
@@ -88,7 +91,7 @@ Updated as measurements and decisions come in.
   1 mm from the outer face and the first layers had no wall round it (lid v3 corners failed). With the 10 mm posts the recess is 2 mm from the
   face, 1 mm at the first layer.
   Peek slit in the lid for the POWER and CHARGER LEDs (side-firing on the audio-end board edge beside H5, Y about 19 and 29 from the
-  board-in-chassis photo): a 1 mm wide slit (as thin as prints, so nothing falls in) directly above the LED packages at X 202.5, Y 17 to 31, round ends, flared
+  01-board-in-chassis photo): a 1 mm wide slit (as thin as prints, so nothing falls in) directly above the LED packages at X 202.5, Y 17 to 31, round ends, flared
   at 45 degrees on the inside (1.6 mm deep, 4.2 mm wide at the underside, 0.8 mm of straight 1 mm slot at the outer face) for a wider viewing angle. The CHARGER LED
   faces the SD funnel plate 0.5 mm away, so its side light is mostly blocked; the packages are still visible from above.
 - SSD: bottom (hole side) up, plugged into the ODD board, position measured from the chassis photo (`tools/measure_ssd.py`, `measurements/ssd_mm.json`):
@@ -140,7 +143,7 @@ Hole labels refer to `measurements/hole_map.jpg` (all current names on the photo
 
 ### Main board
 
-Computed from `photos/img1109-full.jpg` with `tools/measure_board.py` and `tools/to_mm.py`.
+Computed from `photos/06-board-underside-full.jpg` with `tools/measure_board.py` and `tools/to_mm.py`.
 Scale: 203.5 mm port edge (X) and 145 mm width (Y). Check: H4-H5 computed 63.3 vs measured 63.0, H5-H6 computed 49.2 vs measured 48.0.
 Accuracy estimate about 0.5 mm, worse near the SD reader corner.
 
@@ -176,13 +179,13 @@ Corrected after the v3 test print with H1 and H5 as references (`tools/apply_pri
 | H9 | 20.4 | 141.8 | away from H2, on H10's line (net 0.9) |
 | H10 | 140.5 | 141.8 | 1.5 toward H4, 1 away from H9, then 0.5 toward the DC end (jig v5) |
 | H11 | 140.5 | 96.8 | new, 45 from H10, same X as H10 |
-| H12 | 1.0 | 71.0 | new, edge half hole by the battery connector (from img1109) |
+| H12 | 1.0 | 71.0 | new, edge half hole by the battery connector (from 06-board-underside) |
 
 Not mounting holes: four heatsink spring screws around the CPU, edge notches (half holes) on the far edge at the DC end and on the step edge.
 
 ### Chassis cross-check of the main board holes
 
-`photos/img1108.jpg` (chassis without the board) with `tools/find_posts.py`, `tools/match_posts.py`:
+`photos/05-chassis-without-board.jpg` (chassis without the board) with `tools/find_posts.py`, `tools/match_posts.py`:
 the hole pattern fits the chassis screw posts with a mirrored similarity transform (board seen from the
 fan side). Affine residuals per hole: H3 1.5, H4 1.6, H5 0.2, H6 0.3, H8 1.0, H9 2.0, H10 0.8 mm.
 Photo perspective limits this check to about 1 to 2 mm. H1 is hidden under the speaker bracket.
@@ -190,7 +193,7 @@ H2 and H7 have no chassis post at all, so the laptop did not use them for mounti
 
 ### ODD daughterboard
 
-From `photos/img1111-full.jpg` with `tools/measure_part.py`, scale from the user's 109 mm width
+From `photos/07-odd-board-caliper-full.jpg` with `tools/measure_part.py`, scale from the user's 109 mm width
 (14.61 px/mm; the caliper ticks in the same photo give 14.7, consistent).
 Frame: aligned to the board's own edges (`tools/odd_align.py`, the board was rotated 2 degrees in the photo), origin at the
 top-left of the aligned outline, BOT side up, X along the SATA edge, Y toward the pointy end. Y calibrated on two ruler references: O7 is 96.0 and the O1..O4 row is 4.0 from the SATA-edge PCB edge (photo was 2 percent short in Y,
@@ -219,14 +222,14 @@ Holes (mm, X, Y, diameter from photo):
 | O7 | 57.2 | 96.0 | 1.9 |
 | O8 | 60.7 | 99.5 | 1.9 |
 
-### Ports (from img1109, `tools/ports.py`, `measurements/ports_mm.json`)
+### Ports (from 06-board-underside, `tools/ports.py`, `measurements/ports_mm.json`)
 
 Connector X extents along the port edge: 3 to 11 (DC jack, edge-mount, mostly above the PCB), 16.2 to 24 (USB-C, upper side), then:
 91 to 109.5 (RJ45), 116.25 to 132.75 (VGA, protrudes 3 mm; v3 print: window and the post after it moved 0.75 toward HDMI), 137.75 to 153 (HDMI), 156.5 to 169.5 (USB 3),
 (photo values; the jig v5 shifts below are applied on top by `tools/apply_print_feedback.py`)
 174.5 to 188 (USB-A), 194.5 to 198.5 (audio jack). SD reader body at X 173 to 199.5, Y 37 to 65, slot opens at the audio-end edge.
 
-### Port profiles (from `photos/img1106`, `tools/port_profiles.py`, `measurements/port_profiles_mm.json`)
+### Port profiles (from `photos/03-port-edge-profile`, `tools/port_profiles.py`, `measurements/port_profiles_mm.json`)
 
 Vertical extent of each connector face relative to the PCB underside (positive up, PCB top = +1.0). Each one scaled by its own
 nominal width because the photo has strong perspective; about 0.5 mm good. Overlay: `measurements/port_profiles_overlay.jpg`.
@@ -245,9 +248,9 @@ Values as used in the CAD, i.e. after the jig v5 corrections (the raw photo valu
 
 ### Fan
 
-Mounting points from `photos/img1108.jpg` (chassis posts, mapped to the board frame with the affine fit of 7 board holes).
-Cross-checked against the screw positions in `photos/board-in-chassis.jpg`: agree within 3 to 5 mm, the chassis photo is better conditioned.
-`photos/img1112.jpg` turned out to have strong perspective (the fan is much closer to the camera than the caliper), so it is not used for sizes.
+Mounting points from `photos/05-chassis-without-board.jpg` (chassis posts, mapped to the board frame with the affine fit of 7 board holes).
+Cross-checked against the screw positions in `photos/01-board-in-chassis.jpg`: agree within 3 to 5 mm, the chassis photo is better conditioned.
+`photos/08-fan-caliper.jpg` turned out to have strong perspective (the fan is much closer to the camera than the caliper), so it is not used for sizes.
 Data: `measurements/fan_mm.json`.
 
 | Item | Board frame (X, Y) mm |
@@ -260,7 +263,7 @@ Data: `measurements/fan_mm.json`.
 | Impeller center, dia | 39.9, 193.7, about 55 mm (jig v6 ruler: hub centre 47 from the DC-end inside wall, 44.5 from the far inside wall; the photo had it 2.8 too far from the port edge) |
 | Outlet | edge at Y 146.5, blows toward -Y, i.e. under the board toward the port edge |
 
-All screws are M2.5 (2.1 mm pilots). Outlet spans about X 20 to 80 of the edge facing the board (from img1112). Ear plane assumed at the fan face that is visible in the chassis photo, which faces the floor.
+All screws are M2.5 (2.1 mm pilots). Outlet spans about X 20 to 80 of the edge facing the board (from 08-fan-caliper). Ear plane assumed at the fan face that is visible in the chassis photo, which faces the floor.
 
 ## Open questions
 
@@ -344,7 +347,7 @@ Answered:
 - 2026-11-01: base v3b: intake moved to floor slots beside the fan, channel walls extended to the exhaust wall
 - 2026-11-01: base v3: frame corrected (underside down), 10 mm standoffs, fan at floor level, wind channel, port windows, SD notch
 - 2026-11-01: rectangular base v2 with fan mounts, floor grille and wall slots; fan mounts from chassis posts
-- 2026-11-01: ODD board and fan measured from img1111/img1112, main board holes cross-checked against chassis posts
+- 2026-11-01: ODD board and fan measured from 07-odd-board-caliper/08-fan-caliper, main board holes cross-checked against chassis posts
 - 2026-11-01: base plate and test jig modeled, exports in `cad/out/`
-- 2026-11-01: main board outline and 10 mounting holes measured from img1109
+- 2026-11-01: main board outline and 10 mounting holes measured from 06-board-underside
 - 2026-11-01: build123d-mcp installed, project config in `.mcp.json`, modeling skill in `.claude/skills/`

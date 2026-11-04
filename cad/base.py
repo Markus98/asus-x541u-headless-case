@@ -4,7 +4,7 @@ plus a low-filament fit jig (same walls and bosses, floor replaced by bars).
 Board frame (see DESIGN.md): X along the port edge from the DC-jack end, Y inward from the port edge.
 Case frame = board frame: x = X, y = Y, z up, z = 0 at the underside of the base. The base floor is the
 laptop's chassis floor: fan, heatsink and ports live in the 10 mm layer between floor and PCB.
-Plan view of the case matches photos/board-in-chassis.jpg rotated so the port edge is at the bottom.
+Plan view of the case matches photos/01-board-in-chassis.jpg rotated so the port edge is at the bottom.
 """
 from build123d import *
 import math
@@ -22,7 +22,7 @@ fan_env = (12.3, 87.2, 146.5, 236.2)      # X_min, X_max, Y_min, Y_max
 fan_center = (39.9, 193.7)
 fan_impeller_d = 55
 port_x = [[2.0, 10.0], [15.7, 23.5], [91.0, 109.5], [116.75, 133.25], [137.75, 153.0], [156.5, 169.5], [174.5, 188.0], [194.5, 198.5]]      # connector X extents along the port edge
-port_profiles = {"dc": {"x": [2.0, 10.0], "z_top": 4.4, "z_bottom": -0.5, "face_w": 8.0, "shape": "circle", "d": 9.0}, "usbc": {"x": [15.7, 23.5], "z_top": 4.7, "z_bottom": 0.7, "face_w": 8.9, "shape": "rrect"}, "rj45": {"x": [91.0, 109.5], "z_top": 4.2, "z_bottom": -9.8, "face_w": 16.0, "shape": "rect"}, "vga": {"x": [116.75, 133.25], "z_top": 1.9, "z_bottom": -5.7, "face_w": 16.9, "shape": "dsub"}, "hdmi": {"x": [137.75, 153.0], "z_top": 2.3, "z_bottom": -2.6, "face_w": 15.0, "shape": "hdmi"}, "usb3": {"x": [156.5, 169.5], "z_top": 3.1, "z_bottom": -3.6, "face_w": 13.1, "shape": "rect"}, "usb2": {"x": [174.5, 188.0], "z_top": 3.1, "z_bottom": -3.8, "face_w": 13.1, "shape": "rect"}, "audio": {"x": [194.5, 198.5], "z_top": 2.9, "z_bottom": -2.5, "face_w": 6.8, "shape": "circle"}}     # z relative to the PCB underside, from img1106
+port_profiles = {"dc": {"x": [2.0, 10.0], "z_top": 4.4, "z_bottom": -0.5, "face_w": 8.0, "shape": "circle", "d": 9.0}, "usbc": {"x": [15.7, 23.5], "z_top": 4.7, "z_bottom": 0.7, "face_w": 8.9, "shape": "rrect"}, "rj45": {"x": [91.0, 109.5], "z_top": 4.2, "z_bottom": -9.8, "face_w": 16.0, "shape": "rect"}, "vga": {"x": [116.75, 133.25], "z_top": 1.9, "z_bottom": -5.7, "face_w": 16.9, "shape": "dsub"}, "hdmi": {"x": [137.75, 153.0], "z_top": 2.3, "z_bottom": -2.6, "face_w": 15.0, "shape": "hdmi"}, "usb3": {"x": [156.5, 169.5], "z_top": 3.1, "z_bottom": -3.6, "face_w": 13.1, "shape": "rect"}, "usb2": {"x": [174.5, 188.0], "z_top": 3.1, "z_bottom": -3.8, "face_w": 13.1, "shape": "rect"}, "audio": {"x": [194.5, 198.5], "z_top": 2.9, "z_bottom": -2.5, "face_w": 6.8, "shape": "circle"}}     # z relative to the PCB underside, from 03-port-edge-profile
 odd_mounts = {"O1": [193.9, 115.1], "O7": [140.5, 207.0]}     # ODD board holes O1 and O7 in the board frame (O6 sits on H8)
 odd_boss_h = 14.0
 ssd_x = (128.2, 198.0); ssd_y = (9.6, 109.6); ssd_z_top = 23.0     # SSD, bottom (hole side) up
@@ -105,7 +105,7 @@ stand_end_notch = 10.0   # the walls stop this short of both ends: the lid's cor
 stand_foot_chamfer = 2.0 # 45 degree gusset along the outside foot of each rail, where it meets the plate, for strength
 stand_end_chamfer = 3.0  # on the rail ends and the LED step risers (the side profile); the 7.9 mm rail piece between them limits it
 stand_led_h = 8.0        # wall height over the LED slit (10.4 from the audio-end face) so the LEDs show when the case stands on that end
-led_y = (19.0, 29.0)     # POWER and CHARGER LEDs, side-firing on the audio-end board edge beside H5 (board-in-chassis photo, about 1 mm)
+led_y = (19.0, 29.0)     # POWER and CHARGER LEDs, side-firing on the audio-end board edge beside H5 (01-board-in-chassis photo, about 1 mm)
 coil_x = 104.0           # antenna cable coil on the floor beside the WiFi card, between the fan and the ODD board leg: the two half-round
 coil_y = (190.0, 226.0)  # ends of a pill (C walls), centres; the cable winds round both, 36 mm apart
 coil_r = 8.0             # outer radius of the C (coax needs 5 mm bend radius or more)

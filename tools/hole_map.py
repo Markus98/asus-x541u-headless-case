@@ -22,25 +22,25 @@ RED, BLUE, GREEN, GREY = (0, 0, 255), (255, 80, 0), (0, 160, 0), (120, 120, 120)
 
 # A: main board underside, H labels via the homography
 Hm, _, _ = to_mm.fit_homography(145.0); Hi = np.linalg.inv(Hm)
-A = cv2.imread("photos/img1109-full.jpg")
+A = cv2.imread("photos/06-board-underside-full.jpg")
 for k, (X, Y) in H.items():
     p = Hi @ np.array([X, Y, 1.0]); label(A, p[0] / p[2], p[1] / p[2], k, GREY if k in ("H2", "H7") else RED, 1.6, 20)
-title(A, "Main board, underside (img1109). H2, H7 unused")
+title(A, "Main board, underside (06-board-underside). H2, H7 unused")
 
 # B: chassis without the board, H and M labels via the affine fit
-Af = np.load("measurements/img1108_affine.npy")
-B = cv2.imread("photos/img1108-full.jpg")
+Af = np.load("measurements/05-chassis-without-board_affine.npy")
+B = cv2.imread("photos/05-chassis-without-board-full.jpg")
 for k, (X, Y) in H.items():
     p = Af @ np.array([X, Y, 1.0]); label(B, p[0], p[1], k, GREY if k in ("H2", "H7") else RED, 1.6, 20)
 for k, (X, Y) in M.items():
     p = Af @ np.array([X, Y, 1.0]); label(B, p[0], p[1], k, BLUE, 1.6, 20)
-title(B, "Chassis without the board (img1108): H = board holes, M = fan mounts")
+title(B, "Chassis without the board (05-chassis-without-board): H = board holes, M = fan mounts")
 
 # C: ODD board, O labels
-C = cv2.imread("photos/img1111-full.jpg"); bx, by, _, _ = o["bbox_px"]; s = o["px_per_mm"]
+C = cv2.imread("photos/07-odd-board-caliper-full.jpg"); bx, by, _, _ = o["bbox_px"]; s = o["px_per_mm"]
 for k, (X, Y, _) in o["holes_mm"].items():
     label(C, bx + X * s, by + Y * s, k, GREEN if k in ("O1", "O6", "O7") else GREY, 1.6, 20)
-title(C, "ODD board, BOT side (img1111): O1, O7 on bosses, O6 on H8")
+title(C, "ODD board, BOT side (07-odd-board-caliper): O1, O7 on bosses, O6 on H8")
 
 # D: CAD plan in the board frame (X right, Y up), everything
 sc = 6; W_, H_ = int(230 * sc), int(260 * sc)

@@ -15,7 +15,7 @@ fan_env = ({e['X_min']}, {e['X_max']}, {e['Y_min']}, {e['Y_max']})      # X_min,
 fan_center = ({f['impeller_center'][0]}, {f['impeller_center'][1]})
 fan_impeller_d = {f['impeller_dia']}
 port_x = {json.dumps(p['port_edge_X'])}      # connector X extents along the port edge
-port_profiles = {json.dumps({k: dict(x=v['x'], z_top=v['z_top'], z_bottom=v['z_bottom'], face_w=v['face_w'], shape=v['shape'], **({'d': v['d']} if 'd' in v else {})) for k, v in pp.items()})}     # z relative to the PCB underside, from img1106
+port_profiles = {json.dumps({k: dict(x=v['x'], z_top=v['z_top'], z_bottom=v['z_bottom'], face_w=v['face_w'], shape=v['shape'], **({'d': v['d']} if 'd' in v else {})) for k, v in pp.items()})}     # z relative to the PCB underside, from 03-port-edge-profile
 odd_mounts = {json.dumps(od['mounts'])}     # ODD board holes O1 and O7 in the board frame (O6 sits on H8)
 odd_boss_h = {od['boss_h']}
 ssd_x = ({sd['x_from']}, {sd['x_to']}); ssd_y = ({sd['y_far_end']}, {sd['y_connector_end']}); ssd_z_top = {sd['z_top']}     # SSD, bottom (hole side) up

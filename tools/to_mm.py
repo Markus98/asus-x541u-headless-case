@@ -2,15 +2,15 @@
 rectangle (port edge = L mm, width = W mm) and map outline corners and holes to mm.
 
 Frame: X along the port edge from the DC-jack end (0) to the audio-jack end (L),
-Y perpendicular from the port edge inward. In img1109 (back side) X runs right-to-left, Y upward.
+Y perpendicular from the port edge inward. In 06-board-underside (back side) X runs right-to-left, Y upward.
 Usage: python3 tools/to_mm.py [W_mm]
 """
 import sys, json, cv2, numpy as np
 L = 203.5
 
 def fit_homography(W=145.0):
-    """Return (Hm, px_per_mm, corners): homography img1109 px -> board mm, and the port-edge scale."""
-    green = cv2.imread("measurements/img1109_green.png", 0)
+    """Return (Hm, px_per_mm, corners): homography 06-board-underside px -> board mm, and the port-edge scale."""
+    green = cv2.imread("measurements/06-board-underside_green.png", 0)
     green = cv2.morphologyEx(green, cv2.MORPH_CLOSE, np.ones((15, 15), np.uint8))
 
     def fit(p, q, band=40):
@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
     # overlay: outline and holes mapped back onto the photo
     inv = np.linalg.inv(Hm)
-    img = cv2.imread("photos/img1109-full.jpg")
+    img = cv2.imread("photos/06-board-underside-full.jpg")
     o = out["outline"]; ring = [o["DC end / port edge"], o["audio end / port edge"], o["audio end / step edge"], o["inner L corner"], o["audio end upper part / far edge"], o["DC end / far edge"]]
     px = cv2.perspectiveTransform(np.float32([ring]), inv)[0].astype(int)
     cv2.polylines(img, [px.reshape(-1, 1, 2)], True, (255, 0, 255), 3)
@@ -89,4 +89,4 @@ if __name__ == "__main__":
         a = cv2.perspectiveTransform(np.float32([[[gx, 0], [gx, W]]]), inv)[0].astype(int); cv2.line(img, tuple(a[0]), tuple(a[1]), (255, 255, 0), 1)
     for gy in range(0, int(W) + 1, 10):
         a = cv2.perspectiveTransform(np.float32([[[0, gy], [L, gy]]]), inv)[0].astype(int); cv2.line(img, tuple(a[0]), tuple(a[1]), (255, 255, 0), 1)
-    cv2.imwrite("measurements/img1109_overlay.jpg", cv2.resize(img, None, fx=0.5, fy=0.5), [cv2.IMWRITE_JPEG_QUALITY, 85])
+    cv2.imwrite("measurements/06-board-underside_overlay.jpg", cv2.resize(img, None, fx=0.5, fy=0.5), [cv2.IMWRITE_JPEG_QUALITY, 85])

@@ -1,5 +1,5 @@
 {
- "note": "z relative to the PCB underside, positive up (PCB top = +1.0). From img1106 via tools/port_profiles.py",
+ "note": "z relative to the PCB underside, positive up (PCB top = +1.0). From 03-port-edge-profile via tools/port_profiles.py",
  "ports": {
   "dc": {
    "x": [

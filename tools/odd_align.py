@@ -1,11 +1,11 @@
 """Re-derive the ODD board frame from its own edges instead of the photo's bounding box.
-Finds the dominant edge direction of the board outline in img1111-full, rotates the outline and the holes
+Finds the dominant edge direction of the board outline in 07-odd-board-caliper-full, rotates the outline and the holes
 into that frame, and rescales so the extent along the SATA edge is 109 mm. Updates measurements/odd_mm.json."""
 import json, cv2, numpy as np
 o = json.load(open("measurements/odd_mm.json")); bx, by, bw, bh = o["bbox_px"]
 if "holes_mm_bbox_frame" in o: o["holes_mm"] = o["holes_mm_bbox_frame"]; o["px_per_mm"] = o["px_per_mm_bbox_frame"]
 s = o["px_per_mm"]; o["px_per_mm_bbox_frame"] = s
-img = cv2.imread("photos/img1111-full.jpg"); hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+img = cv2.imread("photos/07-odd-board-caliper-full.jpg"); hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 mask = cv2.inRange(hsv, (30, 60, 35), (100, 255, 255)) | cv2.inRange(hsv, (5, 80, 60), (28, 255, 255))
 mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((7, 7), np.uint8))
 mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, np.ones((41, 41), np.uint8))

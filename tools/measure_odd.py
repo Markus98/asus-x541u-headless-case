@@ -1,8 +1,8 @@
-"""Measure the ODD daughterboard from img1108 using the 2.5" SSD (100 x 69.85 mm) as scale.
+"""Measure the ODD daughterboard from 05-chassis-without-board using the 2.5" SSD (100 x 69.85 mm) as scale.
 Frame: X along the SSD long side, Y along its short side, origin at the SSD corner nearest the board.
 Prints ODD outline corners and hole centers in mm and writes measurements/odd_mm.json + overlay."""
 import json, cv2, numpy as np
-img = cv2.imread("photos/img1108-full.jpg"); hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV); H, S, V = cv2.split(hsv)
+img = cv2.imread("photos/05-chassis-without-board-full.jpg"); hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV); H, S, V = cv2.split(hsv)
 s = 4032 / 2000
 def roi_mask(m, x0, y0, x1, y1):
     r = np.zeros_like(m); r[int(y0*s):int(y1*s), int(x0*s):int(x1*s)] = 255; return m & r
@@ -56,4 +56,4 @@ json.dump(out, open("measurements/odd_mm.json", "w"), indent=1)
 dbg = img.copy(); cv2.polylines(dbg, [poly.reshape(-1, 1, 2)], True, (255, 0, 255), 4); cv2.polylines(dbg, [box.astype(int).reshape(-1, 1, 2)], True, (0, 255, 0), 4)
 for i, p in enumerate(poly): cv2.putText(dbg, f"c{i}", (int(p[0]) + 10, int(p[1]) - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.4, (255, 0, 255), 3)
 for i, (x, y, r) in enumerate(holes): cv2.circle(dbg, (int(x), int(y)), 40, (0, 255, 255), 3); cv2.putText(dbg, f"D{i+1}", (int(x) + 45, int(y) + 15), cv2.FONT_HERSHEY_SIMPLEX, 1.4, (0, 255, 255), 3)
-cv2.imwrite("measurements/img1108_overlay.jpg", dbg[int(650*s):int(1350*s), int(700*s):int(1850*s)], [cv2.IMWRITE_JPEG_QUALITY, 85])
+cv2.imwrite("measurements/05-chassis-without-board_overlay.jpg", dbg[int(650*s):int(1350*s), int(700*s):int(1850*s)], [cv2.IMWRITE_JPEG_QUALITY, 85])

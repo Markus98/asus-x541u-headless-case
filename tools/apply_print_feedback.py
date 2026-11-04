@@ -23,7 +23,7 @@ N["H10"][0] -= 0.5                                                # jig v5: the 
 N["H9"] = step(H["H9"], [2 * H["H9"][0] - H["H2"][0], 2 * H["H9"][1] - H["H2"][1]], 1.5)                     # 1.5 away from H2
 N["H9"][1] = N["H10"][1]                                                                                      # same line as H10
 N["H11"] = [N["H10"][0], N["H10"][1] - 45.0]                      # missing hole, 45 from H10 toward the port edge, same X as H10
-N["H12"] = [1.0, 71.0]                                            # edge half hole next to the battery connector (img1109, tools scan)
+N["H12"] = [1.0, 71.0]                                            # edge half hole next to the battery connector (06-board-underside, tools scan)
 b["holes"] = {k: r(v) for k, v in N.items()}
 b["holes_note"] = "corrected from the v3 test print (tools/apply_print_feedback.py); holes_photo are the raw photo values"
 json.dump(b, open("measurements/board_mm.json", "w"), indent=1)
@@ -42,7 +42,7 @@ def rot(p):
 M3, M2 = rot(M3), rot(M2)
 f["mounts"] = {"M1": M["M1"], "M2": r(M2), "M3": r(M3)}
 f["fan_rotation_deg"] = round(math.degrees(ang), 2)
-f["wifi_nub"] = r([M3[0] + 24.1, M3[1]])      # WiFi card locating post: in line with M3, 24.1 toward the audio end (chassis photo img1108)
+f["wifi_nub"] = r([M3[0] + 24.1, M3[1]])      # WiFi card locating post: in line with M3, 24.1 toward the audio end (chassis photo 05-chassis-without-board)
 E = f.get("envelope_photo", f["envelope"]); f["envelope_photo"] = E
 f["envelope"] = dict(E, Y_max=round(E["Y_max"] + 2.0, 1))
 C = f.get("impeller_center_photo", f["impeller_center"]); f["impeller_center_photo"] = C
@@ -53,7 +53,7 @@ f["impeller_center"] = r([f["impeller_center"][0], f["envelope"]["Y_max"] + 2.0 
 f["boss_h"] = {"M2": 8.4, "M3": 4.5}
 json.dump(f, open("measurements/fan_mm.json", "w"), indent=1)
 
-# ODD board flipped over the main board, BOT side up as in img1111/img1114, O6 on H8. ODD X runs along -X, ODD Y along +Y.
+# ODD board flipped over the main board, BOT side up as in 07-odd-board-caliper and 09-board-in-jig, O6 on H8. ODD X runs along -X, ODD Y along +Y.
 o = json.load(open("measurements/odd_mm.json"))["holes_mm"]
 H8 = b["holes"]["H8"]
 def odd_to_board(p): return r([H8[0] + (o["O6"][0] - p[0]), H8[1] + (p[1] - o["O6"][1])])

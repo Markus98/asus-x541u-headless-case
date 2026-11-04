@@ -1,9 +1,9 @@
-"""Connector extents along the port edge (and the SD reader on the audio-end edge) from img1109.
+"""Connector extents along the port edge (and the SD reader on the audio-end edge) from 06-board-underside.
 Samples the foreground (not table) just outside the PCB edge in board mm via the homography."""
 import sys, json, cv2, numpy as np
 sys.argv = ["x"]; sys.path.insert(0, "tools"); import to_mm
 Hm, _, _ = to_mm.fit_homography(145.0); Hi = np.linalg.inv(Hm)
-img = cv2.imread("photos/img1109-full.jpg"); hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV); S, V = hsv[..., 1], hsv[..., 2]
+img = cv2.imread("photos/06-board-underside-full.jpg"); hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV); S, V = hsv[..., 1], hsv[..., 2]
 fg = ((S > 60) | (V < 150)).astype(np.uint8)          # anything that is not the white table
 fg = cv2.morphologyEx(fg, cv2.MORPH_OPEN, np.ones((5, 5), np.uint8))
 def px(X, Y):

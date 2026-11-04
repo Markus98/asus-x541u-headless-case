@@ -1,10 +1,10 @@
-"""Port heights and vertical positions from the side profile photo (img1106).
+"""Port heights and vertical positions from the side profile photo (03-port-edge-profile).
 The PCB edge is fitted as a line; around a seed box per connector the four silhouette edges are refined to the
 strongest intensity gradient; the known connector width gives the local scale (the photo has strong perspective).
 Writes measurements/port_profiles_mm.json: per port X range (from ports_mm.json), z range relative to the PCB
 underside (positive up), shape and nominal face size. Overlay: measurements/port_profiles_overlay.jpg"""
 import json, cv2, numpy as np
-im = cv2.imread('photos/img1106-full.jpg'); H, W = im.shape[:2]; x0, y0 = int(W * 0.03), int(H * 0.36)
+im = cv2.imread('photos/03-port-edge-profile-full.jpg'); H, W = im.shape[:2]; x0, y0 = int(W * 0.03), int(H * 0.36)
 crop = im[y0:y0 + 484, x0:x0 + 3347]; gray = cv2.GaussianBlur(cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY), (3, 3), 0).astype(float)
 hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV)
 g = cv2.morphologyEx(cv2.inRange(hsv, (35, 40, 60), (90, 255, 255)), cv2.MORPH_OPEN, np.ones((3, 9), np.uint8))
@@ -42,5 +42,5 @@ for name, s in seeds.items():
     cv2.rectangle(ov, (xa, ya), (xb, yb), (0, 0, 255), 2); cv2.putText(ov, name, (xa, ya - 5), 0, 0.7, (0, 0, 255), 2)
 cv2.line(ov, (0, int(b)), (3346, int(k * 3346 + b)), (0, 255, 255), 1)
 cv2.imwrite('measurements/port_profiles_overlay.jpg', ov)
-json.dump({'note': 'z relative to the PCB underside, positive up (PCB top = +1.0). From img1106 via tools/port_profiles.py', 'ports': out},
+json.dump({'note': 'z relative to the PCB underside, positive up (PCB top = +1.0). From 03-port-edge-profile via tools/port_profiles.py', 'ports': out},
           open('measurements/port_profiles_mm.json', 'w'), indent=1)

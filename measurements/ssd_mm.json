@@ -1,5 +1,5 @@
 {
- "note": "SSD in the case frame, bottom (hole side) up, connector end toward +Y, from img1108 via tools/measure_ssd.py",
+ "note": "SSD in the case frame, bottom (hole side) up, connector end toward +Y, from 05-chassis-without-board via tools/measure_ssd.py",
  "x_from": 128.2,
  "x_to": 198.0,
  "y_connector_end": 109.6,
