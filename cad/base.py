@@ -95,7 +95,7 @@ clip_slot_h = 1.2        # PCB plus the ribbon cable, tight (1.5 was loose)
 clip_bend_r = 1.5        # the bar on one side of the slot ends in a full half round of this radius (3 mm diameter) for the cable to fold round
 clip_wall = 2.0          # beside the slot
 clip_bar_t = 1.5         # the rectangular bar on the other side of the slot
-clip_ext = (2.0, 1.5)    # two versions: straight depth along the board before the half round (total depth clip_ext + clip_bend_r)
+clip_ext = 2.0           # straight depth along the board before the half round (total depth clip_ext + clip_bend_r); 1.5 was printed too and not used
 stand_clear = 0.3        # stand: slot to the case thickness, per side
 stand_floor_t = 2.0      # a flat plate, so books and the like can lie on it beside the case
 stand_rail_w = 4.0       # the slot walls are two rails on the plate, this thick
@@ -383,8 +383,8 @@ def build_odd_clip(ext):
     rnd = rnd.move(Location((0, yb + r, ext))) & Box(w, h, r + 1, align=(Align.CENTER, Align.MIN, Align.MIN)).move(Location((0, 0, ext)))   # keep the outward half
     return ring + bar + rnd
 
-for ext in clip_ext:
-    show(build_odd_clip(ext), "odd_clip_%g" % ext)
+odd_clip = build_odd_clip(clip_ext)
+show(odd_clip, "odd_clip")
 
 # --- stand: the case stands on either end wall, IO to the back, in a slot along its length. Flipping the case between its two ends
 # turns the lid to the other side of the slot, so both walls get the same notches. Stand frame: X along the case from the port-edge

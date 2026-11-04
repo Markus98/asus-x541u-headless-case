@@ -102,11 +102,11 @@ Updated as measurements and decisions come in.
 - ODD spacer (`cad/out/odd_spacer.stl`): a loose 6 mm disc, 2 mm tall (the ODD board sits 2 mm above the main board top, measured on jig v6),
   placed on the main board top under ODD hole O6, with a 2.3 mm nub 7.8 mm long up through the 2.6 mm hole to 0.1 under the lid, so the spacer
   can move neither up nor down once the lid is on. Replaces the drilled H8 spacer: O6 is no longer over a board hole. Prints nub up.
-- ODD cable clip (`cad/out/odd_clip_2.stl`, `cad/out/odd_clip_1.5.stl`): keeps the folded ODD ribbon cable from creasing. A 26.5 x 5.7 mm
+- ODD cable clip (`cad/out/odd_clip.stl`): keeps the folded ODD ribbon cable from creasing. A 26.5 x 5.7 mm
   ring that slips onto the ODD board's pointy end: slot 22.5 wide and 1.2 tall (PCB plus ribbon, tight; 1.5 was loose), 2 mm side walls, a
-  1.5 mm rectangular bar on one side of the slot and on the other a 3 mm bar between the side walls that is straight for 2 mm (or 1.5 mm,
-  the second version) along the board and then ends in a full half round of 1.5 mm radius, round face outward, for the cable to fold round.
-  Total depth 3.5 (3.0) mm, the side walls flush with the half round's apex. Prints flat on the inner face (the half round is a dome on top,
+  1.5 mm rectangular bar on one side of the slot and on the other a 3 mm bar between the side walls that is straight for 2 mm along the
+  board and then ends in a full half round of 1.5 mm radius, round face outward, for the cable to fold round. Total depth 3.5 mm, the
+  side walls flush with the half round's apex. A 1.5 mm straight version was printed too; the 2 mm one is used. Prints flat on the inner face (the half round is a dome on top,
   no overhang). ODD PCB thickness assumed 1.0 like the main board.
 - Stand (`cad/out/stand.stl`): the case stands vertically on either end wall with the ports to the back, in a slot along its length.
   A flat 243.5 x 56 x 2 mm plate (the case length, corners on the 5.1 fillet, 1 mm chamfer on the top edge) so books and the like can lie
@@ -281,6 +281,7 @@ Fill in after the colon on each line.
   ODD spacer disc sits:
 - Board-top airflow with only 3 intake slots left: does the board top (memory, VRM) run warm standing on the audio end:
 - ODD cable clips printed (2 and 1.5 mm straight, 1.2 slot): which depth, does the slot take the board plus the ribbon, does it stay put:
+  the 2 mm one is used; the 1.5 mm version is dropped (2026-11-04)
 - Stand v1 printed (2 mm plate, 4 mm rails 14 tall, 26.3 slot, notches at the ends and over the LED slit): does the case slide in, is it
   stable on either end, does the plate stay flat, do the screw heads clear, are the LEDs visible:
 - Lid grille over the fan: enough on a shelf, or does the board top run warm (then offset it toward the board)?:
@@ -315,6 +316,7 @@ Answered:
 
 ## Log
 
+- 2026-11-04: only the 2 mm ODD cable clip is used, the 1.5 mm version is removed (`cad/out/odd_clip.stl`)
 - 2026-11-04: stand slimmed to a 2 mm plate with 4 mm rails (books can lie on the plate; a third of the filament); rail edges chamfered, 3 mm on the ends, 2 mm gusset along the outside foot
 - 2026-11-03: stand for standing the case on either end wall, ports to the back (`cad/out/stand.stl`): slotted bar, walls notched at the ends
   for the lid screw heads and over the LED slit

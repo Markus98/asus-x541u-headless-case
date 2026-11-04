@@ -19,7 +19,7 @@ All files are in `cad/out/`. Everything prints without supports.
 | `base.stl` | Base: standoffs, fan mounts, wind channel, port windows, vents, SD card funnel | As is, floor down |
 | `lid.stl` | Lid with lip, screw holes, fan grille and LED peek slit | Already flipped, top face down |
 | `odd_spacer.stl` | Spacer under the daughterboard's hole over the main board, with a nub up to the lid | Nub up |
-| `odd_clip_2.stl`, `odd_clip_1.5.stl` | Clip on the daughterboard's pointy end that keeps the ribbon cable from creasing (two depths) | Flat, dome up |
+| `odd_clip.stl` | Clip on the daughterboard's pointy end that keeps the ribbon cable from creasing | Flat, dome up |
 | `stand.stl` | Stand for standing the case on either end, ports to the back | Slot up |
 | `jig.stl`, `io_jig.stl`, `lid_jig.stl` | Test fixtures for checking hole and port positions with less filament | As the parts above |
 
@@ -30,7 +30,7 @@ M3 x 10 screws for the lid.
 
 ![Lid underside](cad/out/lid_bottom.png)
 
-![Cable clip, two depths](cad/out/odd_clip.png)
+![Cable clip](cad/out/odd_clip.png)
 
 ![Stand](cad/out/stand.png)
 
