@@ -13,7 +13,8 @@ Updated as measurements and decisions come in.
 - Storage: 2.5 inch SATA SSD on the ODD daughterboard's SATA connector
 - SD card reader on the back side at the audio-jack end edge (slot opens at that edge)
 - Fan is chassis-mounted beside the board, not on the board. WiFi card hangs about 25 mm past the board edge.
-- Photos in `photos/` (HEIC originals plus JPEG conversions, `*-full.jpg` is full resolution)
+- Photos in `photos/` (JPEG conversions without EXIF, `*-full.jpg` is full resolution). The HEIC originals carry location
+  metadata and sit in `originals/`, which is ignored by git and only exists locally.
   - `01-board-in-chassis.jpg`: fan side, original layout
   - `02-chassis-odd-flipped-ssd.jpg`: fan side, ODD board flipped over the main board with SSD, the intended layout
   - `03-port-edge-profile.jpg`: port edge side profile

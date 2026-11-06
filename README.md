@@ -41,7 +41,7 @@ through the [build123d-mcp](https://pypi.org/project/build123d-mcp/) server (con
 validates, renders and exports the parts. The Python tools use `uv`.
 
 Board dimensions come from photos: the scripts in `tools/` measure holes, ports, the fan and the SSD from the images in
-`photos/` and write `measurements/*.json`. Corrections from test prints are applied by `tools/apply_print_feedback.py`,
+`photos/` and write `measurements/*.json`. The photos are EXIF-free JPEG conversions; the camera originals are not in the repo. Corrections from test prints are applied by `tools/apply_print_feedback.py`,
 and `tools/gen_params.py` stamps the result into the parameter block at the top of `cad/base.py`.
 
 ```

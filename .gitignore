@@ -1,4 +1,5 @@
-# camera originals carry location metadata; the JPEG conversions in photos/ have no EXIF
+# camera originals carry location metadata; they live in originals/, never committed. The JPEG conversions in photos/ have no EXIF
+originals/
 *.HEIC
 *.heic
 __pycache__/
